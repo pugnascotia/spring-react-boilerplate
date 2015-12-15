@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 class Hello extends React.Component {
 
@@ -13,8 +13,8 @@ class Hello extends React.Component {
 }
 
 Hello.propTypes = {
-    content: React.PropTypes.string,
-    author: React.PropTypes.string
+    content: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired
 };
 
 export default Hello;

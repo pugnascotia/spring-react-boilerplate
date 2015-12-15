@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Hello from './Hello';
 
 class HelloList extends React.Component {
@@ -11,5 +11,12 @@ class HelloList extends React.Component {
         );
     }
 }
+
+HelloList.propTypes = {
+    messages: PropTypes.arrayOf(PropTypes.shape({
+        content: PropTypes.string,
+        author: PropTypes.string
+    }).isRequired).isRequired
+};
 
 export default HelloList;
