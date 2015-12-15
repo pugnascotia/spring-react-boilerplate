@@ -4,7 +4,10 @@
       <title>React Demo</title>
   </head>
   <body>
-    <div id="app"><%= ReactDemo.renderApp() %></div>
+    <div id="app"><%= ReactDemo.renderApp(data) %></div>
     <script type="text/javascript" src="/js/bundle.js"></script>
+    <script type="text/javascript">
+    window.__INITIAL_STATE__ = <%= JSON.stringify(data) %>;
+    </script>
   </body>
 </html>

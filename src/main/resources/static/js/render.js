@@ -1,6 +1,6 @@
 function render(template, model) {
     var data = toJsonObject(model);
-    return new EJS({text: template}).render(data);
+    return new EJS({text: template}).render({data: data});
 }
 
 /* Create a real JSON object from the model Map . You can't pass the model directly
