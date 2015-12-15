@@ -1,6 +1,6 @@
 import { ADD_MESSAGE } from './actions';
 
-function messagesApp(state = {messages: []}, action) {
+function commentsApp(state = {messages: []}, action) {
 
     switch (action.type) {
         case ADD_MESSAGE:
@@ -20,4 +20,8 @@ function messagesApp(state = {messages: []}, action) {
     }
 }
 
-export default messagesApp;
+// Replace with a combined reducer if necessary. Using a generic
+// name allows index.jsx to be less app-specific.
+const rootReducer = commentsApp;
+
+export default rootReducer;

@@ -4,12 +4,12 @@ import { renderToString } from 'react-dom/server';
 
 import { createStore } from 'redux';
 import { Provider } from 'react-redux'
-import messagesApp from './reducers';
+import rootReducer from './reducers';
 
 import App from './containers/App';
 
 function buildAppComponent(state) {
-    let store = createStore(messagesApp, state);
+    let store = createStore(rootReducer, state);
     return (
         <Provider store={store}>
             <App />
