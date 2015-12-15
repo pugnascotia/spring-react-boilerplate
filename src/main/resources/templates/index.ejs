@@ -5,9 +5,9 @@
   </head>
   <body>
     <div id="app"><%= ReactDemo.renderApp(data) %></div>
-    <script type="text/javascript" src="/js/bundle.js"></script>
     <script type="text/javascript">
     window.__INITIAL_STATE__ = <%= JSON.stringify(data) %>;
     </script>
+    <script type="text/javascript" src="/js/bundle.js"></script>
   </body>
 </html>
