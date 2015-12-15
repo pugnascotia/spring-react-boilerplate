@@ -10,8 +10,10 @@ import org.springframework.web.servlet.view.script.ScriptTemplateViewResolver;
 public class ViewConfiguration {
 
     private static final String[] scripts = {
+        "static/js/polyfill.js",
         "static/js/ejs.min.js",
-        "static/js/render.js"
+        "static/js/render.js",
+        "static/js/bundle.js"
     };
 
     @Bean
