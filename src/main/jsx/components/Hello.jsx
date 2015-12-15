@@ -1,6 +1,7 @@
 import React from 'react';
 
 class Hello extends React.Component {
+
     render() {
         return (
             <div className="message">
@@ -10,5 +11,10 @@ class Hello extends React.Component {
         );
     }
 }
+
+Hello.propTypes = {
+    content: React.PropTypes.string,
+    author: React.PropTypes.string
+};
 
 export default Hello;
