@@ -1,12 +1,12 @@
-import { ADD_MESSAGE } from './actions';
+import { ADD_COMMENT } from './actions';
 
-function commentsApp(state = {messages: []}, action) {
+function commentsApp(state = {comments: []}, action) {
 
     switch (action.type) {
-        case ADD_MESSAGE:
+        case ADD_COMMENT:
             return {
-                messages: [
-                    ...state.messages,
+                comments: [
+                    ...state.comments,
                     {
                         id: Date.now(),
                         author: action.author,

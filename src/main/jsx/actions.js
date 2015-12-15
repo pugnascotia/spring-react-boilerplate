@@ -1,8 +1,8 @@
-export const ADD_MESSAGE = 'ADD_MESSAGE';
+export const ADD_COMMENT = 'ADD_COMMENT';
 
-export function addMessage(author, content) {
+export function addComment(author, content) {
     return {
-        type: ADD_MESSAGE,
+        type: ADD_COMMENT,
         author,
         content
     }

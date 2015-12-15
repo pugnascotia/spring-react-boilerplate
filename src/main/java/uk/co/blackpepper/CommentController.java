@@ -10,14 +10,14 @@ import javax.inject.Inject;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
-public class MainController {
+public class CommentController {
 
     @Inject
     private CommentRepository repository;
 
     @RequestMapping(value = "/", method = GET)
     public String index(Model model) {
-        model.addAttribute("messages", repository.findAll());
+        model.addAttribute("comments", repository.findAll());
         return "index";
     }
 }

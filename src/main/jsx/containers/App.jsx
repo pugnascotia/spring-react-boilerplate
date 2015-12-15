@@ -1,18 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-import { addMessage } from '../actions';
+import { addComment } from '../actions';
 import AddComment from '../components/AddComment';
-import HelloList from '../components/HelloList';
+import CommentList from '../components/CommentList';
 
 class App extends React.Component {
 
     render() {
-        const { dispatch, messages } = this.props;
+        const { dispatch, comments } = this.props;
         return (
             <div>
-                <AddComment onAddComment={(author,content) => dispatch(addMessage(author,content))} />
-                <HelloList messages={messages} />
+                <AddComment onAddComment={(author,content) => dispatch(addComment(author,content))} />
+                <CommentList comments={comments} />
             </div>
         );
     }

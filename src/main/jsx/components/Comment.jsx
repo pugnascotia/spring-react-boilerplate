@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-class Hello extends React.Component {
+class Comment extends React.Component {
 
     render() {
         return (
@@ -12,9 +12,9 @@ class Hello extends React.Component {
     }
 }
 
-Hello.propTypes = {
+Comment.propTypes = {
     content: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired
 };
 
-export default Hello;
+export default Comment;
