@@ -3,8 +3,8 @@ function render(template, model) {
     return new EJS({text: template}).render(data);
 }
 
-// Create a real JSON object from the model Map . You can't pass the model directly
-// into EJS - it blows up.
+/* Create a real JSON object from the model Map . You can't pass the model directly
+ * into EJS - it blows up. */
 function toJsonObject(model) {
     var o = {}; 
     for (var k in model) { 
