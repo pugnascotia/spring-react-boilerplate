@@ -2,13 +2,13 @@ import React from 'react';
 import { render } from 'react-dom';
 import { renderToString } from 'react-dom/server';
 
-import Hello from './components/Hello';
+import HelloList from './components/HelloList';
 
 if (typeof window !== 'undefined') {
-    var initialState = typeof __INITIAL_STATE__ === 'undefined' ? {} : __INITIAL_STATE__;
-    render(<Hello {...initialState} />, document.getElementById('app'));
+    let state = typeof __INITIAL_STATE__ === 'undefined' ? {} : __INITIAL_STATE__;
+    render(<HelloList {...state} />, document.getElementById('app'));
 }
 
-export function renderApp(data) {
-    return renderToString(<Hello {...data} />);
+export function renderApp(state) {
+    return renderToString(<HelloList {...state} />);
 }
