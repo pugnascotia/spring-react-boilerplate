@@ -6,7 +6,7 @@ class HelloList extends React.Component {
         return (
             <div className="messages">
                 <h1>Messages</h1>
-                { this.props.messages.map(m => <Hello {...m} key={m.id} />) }
+                { this.props.messages.map(m => <Hello author={m.author} content={m.content} key={m.id} />) }
             </div>
         );
     }

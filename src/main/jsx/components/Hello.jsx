@@ -6,7 +6,7 @@ class Hello extends React.Component {
         return (
             <div className="message">
                 <h3>{this.props.content}</h3>
-                <p>{this.props.author}</p>
+                <p>By {this.props.author}</p>
             </div>
         );
     }

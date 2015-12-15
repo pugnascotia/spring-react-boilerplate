@@ -5,9 +5,10 @@ function messagesApp(state = {messages: []}, action) {
     switch (action.type) {
         case ADD_MESSAGE:
             return {
-                content: [
-                    ...state,
+                messages: [
+                    ...state.messages,
                     {
+                        id: Date.now(),
                         author: action.author,
                         content: action.content
                     }
