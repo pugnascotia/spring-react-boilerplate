@@ -1,4 +1,7 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
+
 import Comment from './Comment';
 
 class CommentList extends React.Component {
@@ -6,6 +9,9 @@ class CommentList extends React.Component {
         return (
             <div className="comments">
                 <h1>Messages</h1>
+                <div>
+                    <Link to="/add">Add Comment</Link>
+                </div>
                 { this.props.comments.map(m => <Comment author={m.author} content={m.content} key={m.id} />) }
             </div>
         );
@@ -19,4 +25,5 @@ CommentList.propTypes = {
     }).isRequired).isRequired
 };
 
-export default CommentList;
+/* Inject the entire state and dispatch() into props */
+export default connect(state => state)(CommentList);

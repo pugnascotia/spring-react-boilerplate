@@ -1,27 +1,18 @@
 import { ADD_COMMENT } from './actions';
 
-function commentsApp(state = {comments: []}, action) {
+function comments(state = [], action) {
 
     switch (action.type) {
         case ADD_COMMENT:
-            return {
-                comments: [
-                    ...state.comments,
-                    {
-                        id: Date.now(),
-                        author: action.author,
-                        content: action.content
-                    }
-                ]
-            };
+            return state.concat({
+                id: Date.now(),
+                author: action.author,
+                content: action.content
+            });
 
         default:
             return state;
     }
 }
 
-// Replace with a combined reducer if necessary. Using a generic
-// name allows index.jsx to be less app-specific.
-const rootReducer = commentsApp;
-
-export default rootReducer;
+export default comments;

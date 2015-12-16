@@ -21,11 +21,14 @@
     "babel-core": "^5.8.34",
     "babel-loader": "^5.4.0",
     "babel-plugin-react-transform": "^1.1.1",
+    "history": "^1.13.1",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.1",
+    "react-router": "^1.0.2",
     "react-transform-hmr": "^1.0.1",
     "redux": "^3.0.5",
+    "redux-simple-router": "^1.0.0",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.0"
   }
