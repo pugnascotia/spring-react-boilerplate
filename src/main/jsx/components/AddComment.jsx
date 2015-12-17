@@ -24,21 +24,20 @@ class AddComment extends React.Component {
 
   render() {
     return (
-      <div>
+      <form>
         <h1>Add Comment</h1>
-        <div>
-          <IndexLink to="/" className="btn btn-primary">Back</IndexLink>
-        </div>
-        <div>
+        <div className="form-group">
           <label>Author:</label>
-          <input type="text" size="50" ref="author"/>
+          <input className="form-control" type="text" size="50" ref="author"/>
         </div>
-        <div>
+        <div className="form-group">
           <label>Comment:</label>
-          <input type="text" size="50" ref="content"/>
+          <input className="form-control" type="text" size="50" ref="content"/>
         </div>
-        <button type="submit" onClick={e => this.handleOnClick(e)}>Submit</button>
-      </div>);
+        <IndexLink to="/" className="btn btn-primary">Back</IndexLink>
+        {' '}
+        <button className="btn btn-success" type="submit" onClick={e => this.handleOnClick(e)}>Submit</button>
+      </form>);
   }
 }
 
