@@ -3,12 +3,12 @@ package uk.co.blackpepper.comments;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import uk.co.blackpepper.comments.CommentRepository;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static uk.co.blackpepper.utils.RequestUtils.getRequestPath;
 
 @Controller
 public class CommentController {
@@ -22,10 +22,4 @@ public class CommentController {
 		model.addAttribute("__requestPath", getRequestPath(request));
         return "index";
     }
-
-    private static String getRequestPath(HttpServletRequest request) {
-        return request.getRequestURI() +
-			(request.getQueryString() == null ? "" : "?" + request.getQueryString());
-    }
-
 }

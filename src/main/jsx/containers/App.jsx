@@ -21,6 +21,7 @@ class App extends React.Component {
               <ul className="nav navbar-nav">
                 <li><IndexLink to="/">Home</IndexLink></li>
                 <li><Link to="/add">Add Comment</Link></li>
+                <li><Link to="/signin">Sign In</Link></li>
               </ul>
             </div>
           </div>
