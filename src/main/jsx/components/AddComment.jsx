@@ -2,12 +2,12 @@ import React, { PropTypes } from 'react';
 import { IndexLink, PropTypes as RouterPropTypes } from 'react-router';
 import { connect } from 'react-redux';
 
-import { addComment } from '../actions';
+import { saveComment } from '../actions';
 
 class AddComment extends React.Component {
 
   addComment(author, content) {
-    this.props.dispatch(addComment(author, content));
+    this.props.dispatch(saveComment(author, content));
   }
 
   handleOnClick() {
