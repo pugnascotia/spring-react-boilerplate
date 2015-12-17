@@ -6,7 +6,8 @@ import { render } from 'react-dom';
 import { renderToString } from 'react-dom/server';
 
 /* State management with redux */
-import { compose, createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import comments from './reducers';
 
@@ -20,6 +21,8 @@ import { syncReduxAndRouter, routeReducer } from 'redux-simple-router';
 /* Our routing rules */
 import routes from './routes';
 
+// applyMiddleware supercharges createStore with middleware:
+let createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
 
 /* Combine the routing reducer with the application's reducer(s) */
 const finalReducer = combineReducers(Object.assign({}, {
@@ -30,7 +33,7 @@ const finalReducer = combineReducers(Object.assign({}, {
 if (typeof window !== 'undefined') {
 
     /* Create our redux store using the final reducer from above */
-    const store = createStore(finalReducer, __INITIAL_STATE__);
+    const store = createStoreWithMiddleware(finalReducer, __INITIAL_STATE__);
 
     const history = createHistory();
 
@@ -48,7 +51,7 @@ if (typeof window !== 'undefined') {
 }
 
 export function renderApp(path, state) {
-    let store = createStore(finalReducer, state);
+    let store = createStoreWithMiddleware(finalReducer, state);
     let renderResult = '';
 
     match({ routes, location: path }, (error, redirectLocation, renderProps) => {

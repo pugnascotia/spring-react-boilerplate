@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/pugnascotia/react-demo#readme",
   "devDependencies": {
+    "axios": "^0.8.1",
     "babel-core": "^5.8.34",
     "babel-loader": "^5.4.0",
     "babel-plugin-react-transform": "^1.1.1",
@@ -29,6 +30,7 @@
     "react-transform-hmr": "^1.0.1",
     "redux": "^3.0.5",
     "redux-simple-router": "^1.0.0",
+    "redux-thunk": "^1.0.2",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.0"
   }
