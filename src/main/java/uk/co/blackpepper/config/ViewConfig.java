@@ -1,4 +1,4 @@
-package uk.co.blackpepper;
+package uk.co.blackpepper.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,7 +7,7 @@ import org.springframework.web.servlet.view.script.ScriptTemplateConfigurer;
 import org.springframework.web.servlet.view.script.ScriptTemplateViewResolver;
 
 @Configuration
-public class ViewConfiguration {
+public class ViewConfig {
 
     private static final String[] scripts = {
         "static/js/polyfill.js",

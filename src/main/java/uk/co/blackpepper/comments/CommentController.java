@@ -1,4 +1,4 @@
-package uk.co.blackpepper;
+package uk.co.blackpepper.comments;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
