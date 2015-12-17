@@ -10,7 +10,9 @@ Yes, but with Java. It's inspired by the
 project, but uses:
 
 - [Webpack](https://github.com/webpack/webpack) to bundle all the JavaScript and dependencies
-- Hot module reloading (HMR) of React components
+- [Babel](https://babeljs.io/) for ES6 syntax
+- [Hot module reloading
+  (HMR)](https://github.com/gaearon/react-transform-hmr) of React components
 - [Redux](https://github.com/rackt/redux) to manage state, both in the
   client and when rendering on the server.
 - [react-router](https://github.com/rackt/react-router) for page routing,
