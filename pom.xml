@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>uk.co.blackpepper</groupId>
-	<artifactId>react-demo</artifactId>
+	<artifactId>spring-react-boilerplate</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>react-demo</name>
-	<description>React Demo project for Spring Boot</description>
+	<name>spring-react-boilerplate</name>
+	<description>Spring React Boilerplate project</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -32,13 +32,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.16.6</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -54,7 +55,7 @@
 		</dependency>
 
 	</dependencies>
-	
+
 	<build>
         <defaultGoal>clean spring-boot:run</defaultGoal>
 		<plugins>
@@ -101,6 +102,5 @@
 
 		</plugins>
 	</build>
-	
 
 </project>
