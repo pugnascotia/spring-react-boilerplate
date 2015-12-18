@@ -1,6 +1,8 @@
-import { ADD_COMMENT } from './actions';
+import { combineReducers } from 'redux';
+import { routeReducer } from 'redux-simple-router';
+import { ADD_COMMENT, AUTHENTICATED } from './actions';
 
-function comments(state = [], action) {
+function commentsReducer(state = [], action) {
 
   switch (action.type) {
     case ADD_COMMENT:
@@ -11,4 +13,24 @@ function comments(state = [], action) {
   }
 }
 
-export default comments;
+function authReducer(state = {signedIn: false, roles: []}, action) {
+
+  switch (action.type) {
+    case AUTHENTICATED:
+      return Object.assign({}, state, {signedIn: true, roles: action.roles});
+
+    default:
+      return state;
+  }
+}
+
+export { commentsReducer, authReducer };
+
+/* Combine the routing reducer with the application's reducer(s) */
+const reducer = combineReducers(Object.assign({}, {
+  auth: authReducer,
+  comments: commentsReducer,
+  routing: routeReducer
+}));
+
+export default reducer;

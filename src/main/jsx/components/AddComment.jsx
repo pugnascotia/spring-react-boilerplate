@@ -19,7 +19,7 @@ class AddComment extends React.Component {
     author.value = '';
     content.value = '';
 
-    this.context.history.pushState(null, `/`);
+    this.context.history.pushState(null, '/');
   }
 
   render() {

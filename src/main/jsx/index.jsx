@@ -6,34 +6,33 @@ import { render } from 'react-dom';
 import { renderToString } from 'react-dom/server';
 
 /* State management with redux */
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
-import comments from './reducers';
+import reducer from './reducers';
 
 /* Routing with react-router */
+/* Link state to route with redux-simple-router */
 import { Router, Route, IndexRoute, RoutingContext, match } from 'react-router';
 import createHistory from 'history/lib/createBrowserHistory';
+import { syncReduxAndRouter } from 'redux-simple-router';
 
-/* Link state to route with redux-simple-router */
-import { syncReduxAndRouter, routeReducer } from 'redux-simple-router';
+/* A store-connected authentication helper */
+import auth from './auth';
 
-/* Our routing rules */
+/* Our routing rules (actually a function that takes an auth and returns the rules) */
 import routes from './routes';
 
 // applyMiddleware supercharges createStore with middleware:
-let createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
-
-/* Combine the routing reducer with the application's reducer(s) */
-const finalReducer = combineReducers(Object.assign({}, {
-    comments,
-    routing: routeReducer
-}));
+let createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
 if (typeof window !== 'undefined') {
 
     /* Create our redux store using the final reducer from above */
-    const store = createStoreWithMiddleware(finalReducer, __INITIAL_STATE__);
+    const store = createStoreWithMiddleware(reducer, __INITIAL_STATE__);
+
+    // HACK HACK HACK
+    window.__store = store;
 
     const history = createHistory();
 
@@ -42,7 +41,7 @@ if (typeof window !== 'undefined') {
     let app = (
         <Provider store={store}>
             <Router history={history}>
-                {routes}
+                {routes(auth(store))}
             </Router>
         </Provider>
     );
@@ -51,10 +50,10 @@ if (typeof window !== 'undefined') {
 }
 
 export function renderApp(path, state) {
-    let store = createStoreWithMiddleware(finalReducer, state);
+    let store = createStoreWithMiddleware(reducer, state);
     let renderResult = '';
 
-    match({ routes, location: path }, (error, redirectLocation, renderProps) => {
+    match({ routes: routes(auth(store)), location: path }, (error, redirectLocation, renderProps) => {
         renderResult = renderToString(
             <Provider store={store}>
                 <RoutingContext {...renderProps} />

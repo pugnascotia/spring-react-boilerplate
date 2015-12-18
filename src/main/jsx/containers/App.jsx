@@ -1,9 +1,23 @@
 import React from 'react';
-import { IndexLink, Link } from 'react-router';
+import { IndexLink, Link, PropTypes } from 'react-router';
+import { connect } from 'react-redux';
+import axios from 'axios';
 
 class App extends React.Component {
 
+  handleSignOut() {
+    axios.post('/signout', "")
+      .then(
+        success => this.context.history.replaceState(null, "/")
+        // TODO failure handler?
+      );
+  }
+
   render() {
+    let authLink = this.props.auth.signedIn
+      ? <a href="#" onClick={() => this.handleSignOut()}>Sign Out</a>
+      : <Link to="/signin">Sign In</Link>;
+
     return (
       <div>
         <nav className="navbar navbar-inverse">
@@ -11,9 +25,9 @@ class App extends React.Component {
             <div className="navbar-header">
               <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
+                <span className="icon-bar"/>
+                <span className="icon-bar"/>
+                <span className="icon-bar"/>
               </button>
               <IndexLink to="/" className="navbar-brand">spring-react-boilerplate</IndexLink>
             </div>
@@ -21,7 +35,7 @@ class App extends React.Component {
               <ul className="nav navbar-nav">
                 <li><IndexLink to="/">Home</IndexLink></li>
                 <li><Link to="/add">Add Comment</Link></li>
-                <li><Link to="/signin">Sign In</Link></li>
+                <li>{authLink}</li>
               </ul>
             </div>
           </div>
@@ -35,4 +49,11 @@ class App extends React.Component {
   }
 }
 
-export default App;
+App.contextTypes = { history: PropTypes.history };
+
+function mapStateToProps(state) {
+  return { auth: state.auth };
+}
+
+/* Inject all state and dispatch() into props */
+export default connect(mapStateToProps)(App);
