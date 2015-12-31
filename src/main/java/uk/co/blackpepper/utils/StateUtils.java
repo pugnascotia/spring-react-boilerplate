@@ -3,7 +3,6 @@ package uk.co.blackpepper.utils;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -12,12 +11,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 
+import static uk.co.blackpepper.utils.Functions.map;
+
 public final class StateUtils {
 
 	private static Logger LOG = LoggerFactory.getLogger(StateUtils.class);
 
 	/* Values prefixed with "__" will be made available to the JavaScript
-	 * render function. All other values will be passed to the client's state.
+	 * render function. All other values will be passed in the client's state object.
 	 */
 	public static void populateStateIntoModel(Model model, HttpServletRequest request) {
 		model.addAttribute("__requestPath", getRequestPath(request));
@@ -29,7 +30,7 @@ public final class StateUtils {
 			(request.getQueryString() == null ? "" : "?" + request.getQueryString());
 	}
 
-	private static Map<String, Object> getAuthState() {
+	public static Map<String, Object> getAuthState() {
 		List<String> roles = getRoles();
 
 		Map<String, Object> authState = new HashMap<>();
@@ -40,7 +41,8 @@ public final class StateUtils {
 	}
 
 	private static List<String> getRoles() {
-		return SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
-			.map(GrantedAuthority::getAuthority).collect(Collectors.toList());
+		return map(
+			SecurityContextHolder.getContext().getAuthentication().getAuthorities(),
+			GrantedAuthority::getAuthority);
 	}
 }

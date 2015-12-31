@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-import { IndexLink, PropTypes as RouterPropTypes } from 'react-router';
+import React from 'react';
+import { IndexLink, PropTypes } from 'react-router';
 import { connect } from 'react-redux';
 
 import { saveComment } from '../actions';
@@ -10,7 +10,7 @@ class AddComment extends React.Component {
     this.props.dispatch(saveComment(author, content));
   }
 
-  handleOnClick() {
+  handleOnClick(e) {
     const author = this.refs.author;
     const content = this.refs.content;
 
@@ -36,12 +36,12 @@ class AddComment extends React.Component {
         </div>
         <IndexLink to="/" className="btn btn-primary">Back</IndexLink>
         {' '}
-        <button className="btn btn-success" type="submit" onClick={e => this.handleOnClick(e)}>Submit</button>
+        <button className="btn btn-success" type="button" onClick={() => this.handleOnClick()}>Submit</button>
       </form>);
   }
 }
 
-AddComment.contextTypes = { history: RouterPropTypes.history };
+AddComment.contextTypes = { history: PropTypes.history };
 
 /* Inject dispatch() but no state into props */
 export default connect()(AddComment);

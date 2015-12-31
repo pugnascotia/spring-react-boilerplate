@@ -4,3 +4,5 @@ react-demo.iml
 node
 node_modules/
 bundle.js*
+*.bak
+*.iml

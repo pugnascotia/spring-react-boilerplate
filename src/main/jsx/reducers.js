@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { routeReducer } from 'redux-simple-router';
-import { ADD_COMMENT, AUTHENTICATED } from './actions';
+import { ADD_COMMENT, AUTHENTICATED, LOGGED_OUT } from './actions';
 
 function commentsReducer(state = [], action) {
 
@@ -17,7 +17,16 @@ function authReducer(state = {signedIn: false, roles: []}, action) {
 
   switch (action.type) {
     case AUTHENTICATED:
-      return Object.assign({}, state, {signedIn: true, roles: action.roles});
+      return Object.assign({}, state, {
+        signedIn: true,
+        roles: action.roles
+      });
+
+    case LOGGED_OUT:
+      return Object.assign({}, state, {
+        signedIn: false,
+        roles: ['ROLE_ANONYMOUS']
+      });
 
     default:
       return state;

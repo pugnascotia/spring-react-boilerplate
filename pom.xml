@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.3.0.RELEASE</version>
+		<version>1.3.1.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -69,6 +69,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<!-- http://docs.spring.io/spring-boot/docs/current/maven-plugin/usage.html#Running_the_application -->
+				<configuration>
+					<addResources>true</addResources>
+				</configuration>
 			</plugin>
 
 			<plugin>
@@ -95,7 +99,7 @@
 					</execution>
 					<execution>
 						<id>Run webpack</id>
-						<phase>compile</phase>
+						<phase>generate-resources</phase>
 						<goals>
 							<goal>npm</goal>
 						</goals>
@@ -104,6 +108,21 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>src/main/resources/static/js</directory>
+							<includes>
+								<include>bundle.js*</include>
+							</includes>
+						</fileset>
+					</filesets>
+				</configuration>
 			</plugin>
 
 		</plugins>

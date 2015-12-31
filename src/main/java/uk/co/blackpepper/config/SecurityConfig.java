@@ -13,6 +13,7 @@ import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import uk.co.blackpepper.config.ajax.AjaxAuthenticationFailureHandler;
 import uk.co.blackpepper.config.ajax.AjaxAuthenticationSuccessHandler;
+import uk.co.blackpepper.config.ajax.AjaxLogoutSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -24,6 +25,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Inject
 	private AjaxAuthenticationFailureHandler authFailureHandler;
 
+	@Inject
+	private AjaxLogoutSuccessHandler logoutSuccessHandler;
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication()
@@ -33,8 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring()
-			.antMatchers("/js/**");
+		web.ignoring().antMatchers("/js/**");
 	}
 
 	@Override
@@ -56,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 				.logout()
 				.logoutUrl("/signout")
-				.logoutSuccessUrl("/?signedOut")
+				.logoutSuccessHandler(logoutSuccessHandler)
 				.permitAll();
 	}
 

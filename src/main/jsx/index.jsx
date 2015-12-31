@@ -12,9 +12,10 @@ import { Provider } from 'react-redux'
 import reducer from './reducers';
 
 /* Routing with react-router */
-/* Link state to route with redux-simple-router */
 import { Router, Route, IndexRoute, RoutingContext, match } from 'react-router';
 import createHistory from 'history/lib/createBrowserHistory';
+
+/* Link state to route with redux-simple-router */
 import { syncReduxAndRouter } from 'redux-simple-router';
 
 /* A store-connected authentication helper */

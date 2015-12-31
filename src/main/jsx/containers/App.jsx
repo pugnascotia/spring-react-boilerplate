@@ -3,19 +3,24 @@ import { IndexLink, Link, PropTypes } from 'react-router';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
+import { loggedOut } from '../actions';
+
 class App extends React.Component {
 
   handleSignOut() {
-    axios.post('/signout', "")
+    axios.post('/signout')
       .then(
-        success => this.context.history.replaceState(null, "/")
-        // TODO failure handler?
+        success => {
+          this.props.dispatch(loggedOut());
+          this.context.history.replaceState(null, "/")
+        },
+        failure => console.error("Failed to log out successfully")
       );
   }
 
   render() {
     let authLink = this.props.auth.signedIn
-      ? <a href="#" onClick={() => this.handleSignOut()}>Sign Out</a>
+      ? <a onClick={() => this.handleSignOut()}>Sign Out</a>
       : <Link to="/signin">Sign In</Link>;
 
     return (
@@ -41,7 +46,7 @@ class App extends React.Component {
           </div>
         </nav>
 
-        <div id="app" className="container">
+        <div className="container">
           {this.props.children}
         </div>
       </div>

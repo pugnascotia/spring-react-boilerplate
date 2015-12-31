@@ -27,7 +27,8 @@ class SignIn extends React.Component {
     axios.post('/api/authenticate', data)
       .then(
         success => {
-          this.props.dispatch(authenticated(success.data.roles));
+          debugger;
+          this.props.dispatch(authenticated(success.data));
 
           const { location } = this.props;
           const nextPathName = location.state && location.state.nextPathname ? location.state.nextPathname : '/';
@@ -39,11 +40,16 @@ class SignIn extends React.Component {
   }
 
   render() {
-    let authFailedMessage = this.state.authFailed ? <div>Authentication failed!</div> : null;
+    let authFailedMessage = this.state.authFailed
+      ? (<div class="row"><div className="col-xs-12">Authentication failed!</div></div>)
+      : null;
+
     return (
       <div>
-        <div className="col-sm-6 col-sm-offset-3">
-          <h1>Sign In</h1>
+        <div className="row">
+          <div className="col-sm-6 col-sm-offset-3">
+            <h1>Sign In</h1>
+          </div>
         </div>
         {authFailedMessage}
         <div className="row">
