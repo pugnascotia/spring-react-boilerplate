@@ -27,7 +27,6 @@ class SignIn extends React.Component {
     axios.post('/api/authenticate', data)
       .then(
         success => {
-          debugger;
           this.props.dispatch(authenticated(success.data));
 
           const { location } = this.props;

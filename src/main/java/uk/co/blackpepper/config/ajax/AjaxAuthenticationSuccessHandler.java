@@ -29,7 +29,7 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 		response.setStatus(HttpServletResponse.SC_OK);
 		ServletOutputStream outputStream = response.getOutputStream();
-		
+
 		CsrfToken csrf = (CsrfToken) request.getAttribute("_csrf");
 		if (csrf != null) {
 			Cookie cookie = WebUtils.getCookie(request, "XSRF-TOKEN");
