@@ -10,7 +10,9 @@ class AddComment extends React.Component {
     this.props.dispatch(saveComment(author, content));
   }
 
-  handleOnClick(e) {
+  handleOnSubmit(e) {
+    e.preventDefault();
+    
     const author = this.refs.author;
     const content = this.refs.content;
 
@@ -24,7 +26,7 @@ class AddComment extends React.Component {
 
   render() {
     return (
-      <form>
+      <form onSubmit={(e) => this.handleOnSubmit(e)}>
         <h1>Add Comment</h1>
         <div className="form-group">
           <label>Author:</label>
@@ -36,7 +38,7 @@ class AddComment extends React.Component {
         </div>
         <IndexLink to="/" className="btn btn-primary">Back</IndexLink>
         {' '}
-        <button className="btn btn-success" type="button" onClick={() => this.handleOnClick()}>Submit</button>
+        <button className="btn btn-success" type="submit">Submit</button>
       </form>);
   }
 }
