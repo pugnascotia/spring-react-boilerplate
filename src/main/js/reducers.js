@@ -33,8 +33,6 @@ function authReducer(state = {signedIn: false, roles: []}, action) {
   }
 }
 
-export { commentsReducer, authReducer };
-
 /* Combine the routing reducer with the application's reducer(s) */
 const reducer = combineReducers(Object.assign({}, {
   auth: authReducer,
