@@ -24,40 +24,46 @@ import auth from './auth';
 /* Our routing rules (actually a function that takes an auth and returns the rules) */
 import routes from './routes';
 
+import Errors from './components/NotFound';
+
 // applyMiddleware supercharges createStore with middleware:
 let createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
 if (typeof window !== 'undefined') {
 
-    /* Create our redux store using the final reducer from above */
-    const store = createStoreWithMiddleware(reducer, __INITIAL_STATE__);
+  const store = createStoreWithMiddleware(reducer, window.__INITIAL_STATE__);
 
-    const history = createHistory();
+  const history = createHistory();
 
-    syncReduxAndRouter(history, store);
+  syncReduxAndRouter(history, store);
 
-    let app = (
-        <Provider store={store}>
-            <Router history={history}>
-                {routes(auth(store))}
-            </Router>
-        </Provider>
-    );
+  let app = (
+    <Provider store={store}>
+      <Router history={history}>
+        {routes(auth(store))}
+      </Router>
+    </Provider>
+  );
 
-    render(app, document.getElementById('mount'));
+  render(app, document.getElementById('mount'));
 }
 
 export function renderApp(path, state) {
-    let store = createStoreWithMiddleware(reducer, state);
-    let renderResult = '';
+  let store = createStoreWithMiddleware(reducer, state);
+  let renderResult = '';
 
-    match({ routes: routes(auth(store)), location: path }, (error, redirectLocation, renderProps) => {
-        renderResult = renderToString(
-            <Provider store={store}>
-                <RoutingContext {...renderProps} />
-            </Provider>
-        );
-    });
+  match({ routes: routes(auth(store)), location: path }, (error, redirectLocation, renderProps) => {
+    if (renderProps) {
+      renderResult = renderToString(
+        <Provider store={store}>
+          <RoutingContext {...renderProps} />
+        </Provider>
+      );
+    }
+    else {
+      console.error("Failed to render app for path [" + path + "], error: [" + error + "]");
+    }
+  });
 
-    return renderResult;
+  return renderResult;
 }
