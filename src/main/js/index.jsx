@@ -32,9 +32,6 @@ if (typeof window !== 'undefined') {
     /* Create our redux store using the final reducer from above */
     const store = createStoreWithMiddleware(reducer, __INITIAL_STATE__);
 
-    // HACK HACK HACK
-    window.__store = store;
-
     const history = createHistory();
 
     syncReduxAndRouter(history, store);
