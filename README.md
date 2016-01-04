@@ -30,6 +30,13 @@ You also get:
   before rendering on the server. For more information, see
   [this OpenJDK thread on the subject](http://mail.openjdk.java.net/pipermail/nashorn-dev/2013-September/002006.html)
 
+## Running the code
+
+Execute `mvn` if you have Maven already installed, or `./mvnw` if you don't. You'll need
+[Java8 installed](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) either way at
+a minimum version of 1.8.0_65.
+
+Run webpack in hot-module reloading mode with: `npm run watch`.
 
 ## Conventions
 
