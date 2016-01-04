@@ -28,6 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Inject
 	private AjaxLogoutSuccessHandler logoutSuccessHandler;
 
+	/**
+	 * Demo-only users. Replace this with a real authentication config.
+	 */
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication()
@@ -35,9 +38,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.withUser("admin").password("admin").roles("USER", "ADMIN");
 	}
 
+	/**
+	 * Specify the path that Spring Security will completely ignore. This is distinct
+	 * from paths that are available to all users.
+	 */
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/js/**");
+		web.ignoring().antMatchers("/js/**", "/favicon.ico");
 	}
 
 	@Override
@@ -63,6 +70,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll();
 	}
 
+	/**
+	 * Change the standard CSRF token header name to match what the front-end code expects.
+	 * See also {@link CsrfHeaderFilter}.
+	 */
 	private static CsrfTokenRepository csrfTokenRepository() {
 		HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
 		repository.setHeaderName("X-XSRF-TOKEN");

@@ -7,6 +7,9 @@ import java.util.stream.Stream;
 
 import static uk.co.blackpepper.utils.Streams.asStream;
 
+/**
+ * Utility methods for making it easier to map over a Java list.
+ */
 public final class Functions {
 
 	public static <T,V> List<V> map(final List<T> in, final Function<T, V> function) {

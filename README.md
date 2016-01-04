@@ -27,6 +27,11 @@ You also get:
 - [Project Lombok](https://projectlombok.org/) to cut down the Java
   boilerplate
 - [Jackson](https://github.com/FasterXML/jackson) to serialize model data
-  before rendering on the server. For more information, see [this OpenJDK
-  thread on the
-  subject](http://mail.openjdk.java.net/pipermail/nashorn-dev/2013-September/002006.html)
+  before rendering on the server. For more information, see
+  [this OpenJDK thread on the subject](http://mail.openjdk.java.net/pipermail/nashorn-dev/2013-September/002006.html)
+
+
+## Conventions
+
+Controllers that render views are suffixed with "Controller". REST endpoints are suffixed with "Resource",
+and handle requests under "/api".

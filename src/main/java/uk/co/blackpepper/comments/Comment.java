@@ -3,6 +3,10 @@ package uk.co.blackpepper.comments;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Simple data container class. We need a no-args constructor so that Jackson
+ * can deserialise these.
+ */
 @Data
 @NoArgsConstructor
 public class Comment {
