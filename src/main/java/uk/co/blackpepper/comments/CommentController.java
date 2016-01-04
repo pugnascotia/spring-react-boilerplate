@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static uk.co.blackpepper.utils.StateUtils.populateStateIntoModel;
+import static uk.co.blackpepper.utils.State.populateStateIntoModel;
 
 @Controller
 public class CommentController {

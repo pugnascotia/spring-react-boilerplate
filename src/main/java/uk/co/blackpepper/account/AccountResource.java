@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import uk.co.blackpepper.utils.StateUtils;
+import uk.co.blackpepper.utils.State;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -14,7 +14,7 @@ public class AccountResource {
 
 	@RequestMapping("/account")
 	public Map<String,Object> getAccountStatus() {
-		return StateUtils.getAuthState();
+		return State.getAuthState();
 	}
 
 }

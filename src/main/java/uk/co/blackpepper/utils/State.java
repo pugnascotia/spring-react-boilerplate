@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 
 import static uk.co.blackpepper.utils.Functions.map;
 
-public final class StateUtils {
+public final class State {
 
 	/** Populates standard parts of the shared client/server model into the Spring {@link Model}.
 	 * Values prefixed with "__" will be made available to the JavaScript

@@ -30,6 +30,10 @@ You also get:
   before rendering on the server. For more information, see
   [this OpenJDK thread on the subject](http://mail.openjdk.java.net/pipermail/nashorn-dev/2013-September/002006.html)
 
+## Caveats
+
+This isn't necessarily the best way to write a React application. Pull requests welcome!
+
 ## Running the code
 
 Execute `mvn` if you have Maven already installed, or `./mvnw` if you don't. You'll need

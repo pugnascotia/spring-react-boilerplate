@@ -12,7 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import uk.co.blackpepper.utils.Cookies;
-import uk.co.blackpepper.utils.StateUtils;
+import uk.co.blackpepper.utils.State;
 
 @Component
 public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
@@ -29,7 +29,7 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 
 		ServletOutputStream outputStream = response.getOutputStream();
 
-		mapper.writeValue(outputStream, StateUtils.getAuthState());
+		mapper.writeValue(outputStream, State.getAuthState());
 
 		outputStream.close();
 	}
