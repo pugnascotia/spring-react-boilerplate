@@ -13,7 +13,9 @@ class SignIn extends React.Component {
     this.state = {authFailed: false};
   }
 
-  handleOnSignIn() {
+  handleOnSignIn(event) {
+    event.preventDefault();
+    
     let username = this.refs.username.value.trim();
     let password = this.refs.password.value.trim();
 
@@ -35,7 +37,7 @@ class SignIn extends React.Component {
           this.context.history.replaceState(null, nextPathName);
         },
         failure => this.setState({authFailed: true})
-      )
+      );
   }
 
   authFailedMessage() {
@@ -48,7 +50,7 @@ class SignIn extends React.Component {
 
   render() {
     return (
-      <div>
+      <form onSubmit={(e) => this.handleOnSignIn(e)}>
         <div className="row">
           <div className="col-sm-6 col-sm-offset-3">
             <h1>Sign In</h1>
@@ -65,10 +67,10 @@ class SignIn extends React.Component {
             <input className="form-control" ref="password" type="password" />
           </div>
           <div className="col-sm-6 col-sm-offset-3 form-group">
-            <button onClick={() => this.handleOnSignIn()} type="button" className="btn btn-primary">Sign In</button>
+            <button type="submit" className="btn btn-primary">Sign In</button>
           </div>
         </div>
-      </div>
+      </form>
     );
   }
 }
