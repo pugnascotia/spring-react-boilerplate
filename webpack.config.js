@@ -1,5 +1,5 @@
 var path = require('path');
-var SRC  = path.resolve(__dirname, 'src/main/jsx');
+var SRC  = path.resolve(__dirname, 'src/main/js');
 var DEST = path.resolve(__dirname, 'src/main/resources/static/js');
 
 module.exports = {
