@@ -38,11 +38,15 @@ class SignIn extends React.Component {
       )
   }
 
-  render() {
-    let authFailedMessage = this.state.authFailed
-      ? (<div class="row"><div className="col-xs-12">Authentication failed!</div></div>)
+  authFailedMessage() {
+    return this.state.authFailed
+      ? (<div className="row">
+          <div className="col-xs-12 col-sm-6 col-sm-offset-3 alert alert-danger" role="alert">Authentication failed!</div>
+        </div>)
       : null;
+  }
 
+  render() {
     return (
       <div>
         <div className="row">
@@ -50,7 +54,7 @@ class SignIn extends React.Component {
             <h1>Sign In</h1>
           </div>
         </div>
-        {authFailedMessage}
+        {this.authFailedMessage()}
         <div className="row">
           <div className="col-sm-6 col-sm-offset-3 form-group">
             <label>Username</label>
