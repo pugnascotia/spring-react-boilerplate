@@ -3,31 +3,21 @@ package uk.co.blackpepper.config;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.springframework.web.util.WebUtils;
+import uk.co.blackpepper.utils.Cookies;
 
 public class CsrfHeaderFilter extends OncePerRequestFilter {
 
-	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-		throws ServletException, IOException {
+	/** Ensure that if a request does not supply a CSRF token in a cookie, or
+	 * if the token is not up-to-date, we set it in our response so that subsequent
+	 * requests can succeed. */
 
-		CsrfToken csrf = (CsrfToken) request.getAttribute("_csrf");
-		if (csrf != null) {
-			Cookie cookie = WebUtils.getCookie(request, "XSRF-TOKEN");
-			String token = csrf.getToken();
-			if (cookie == null || token != null && !token.equals(cookie
-				.getValue())) {
-				cookie = new Cookie("XSRF-TOKEN", token);
-				cookie.setPath("/");
-				response.addCookie(cookie);
-			}
-		}
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+		Cookies.setSecurityTokens(request, response);
 		filterChain.doFilter(request, response);
 	}
 }
