@@ -8,7 +8,7 @@ import { loggedOut } from '../actions';
 class App extends React.Component {
 
   handleSignOut() {
-    axios.post('/signout')
+    axios.post('/api/signout')
       .then(
         success => {
           this.props.dispatch(loggedOut());

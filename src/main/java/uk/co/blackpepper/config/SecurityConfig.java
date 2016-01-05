@@ -65,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.csrf().csrfTokenRepository(csrfTokenRepository())
 			.and()
 				.logout()
-				.logoutUrl("/signout")
+				.logoutUrl("/api/signout")
 				.logoutSuccessHandler(logoutSuccessHandler)
 				.permitAll();
 	}
