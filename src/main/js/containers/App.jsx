@@ -18,6 +18,21 @@ class App extends React.Component {
       );
   }
 
+  adminMenu() {
+    return this.props.auth.roles.some(r => r === "ROLE_ADMIN")
+      ? (<li className="dropdown">
+      <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span className="caret"></span></a>
+      <ul className="dropdown-menu">
+        <li><a href="#">Action</a></li>
+        <li><a href="#">Another action</a></li>
+        <li><a href="#">Something else here</a></li>
+        <li role="separator" className="divider"></li>
+        <li><a href="#">Separated link</a></li>
+      </ul>
+    </li>)
+      : null;
+  }
+
   render() {
     let authLink = this.props.auth.signedIn
       ? <a onClick={() => this.handleSignOut()}>Sign Out</a>
@@ -38,6 +53,7 @@ class App extends React.Component {
             </div>
             <div id="navbar" className="collapse navbar-right navbar-collapse">
               <ul className="nav navbar-nav">
+                {this.adminMenu()}
                 <li><IndexLink to="/">Home</IndexLink></li>
                 <li><Link to="/add">Add Comment</Link></li>
                 <li>{authLink}</li>
