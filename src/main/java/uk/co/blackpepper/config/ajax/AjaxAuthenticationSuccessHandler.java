@@ -29,7 +29,7 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 
 		ServletOutputStream outputStream = response.getOutputStream();
 
-		mapper.writeValue(outputStream, State.getAuthState());
+		mapper.writeValue(outputStream, State.getAuthState(request));
 
 		outputStream.close();
 	}
