@@ -19,7 +19,7 @@ import uk.co.blackpepper.utils.State;
 
 /**
  * Largely pinched from {@link org.springframework.boot.autoconfigure.web.BasicErrorController}
- * and customised to render our React template.
+ * and customised to render our React template, along with an appropriate populated state.
  */
 
 @Controller
