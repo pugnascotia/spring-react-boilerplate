@@ -23,7 +23,7 @@ public final class State {
 	 * Values prefixed with "__" will be made available to the JavaScript
 	 * render function only. All other values will be passed in the client's state object.
 	 */
-	public static void populateStateIntoModel(Model model, HttpServletRequest request) {
+	public static void populateModel(Model model, HttpServletRequest request) {
 		model.addAttribute("__requestPath", getRequestPath(request));
 		model.addAttribute("auth", getAuthState(request));
 	}

@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static uk.co.blackpepper.utils.State.populateStateIntoModel;
+import static uk.co.blackpepper.utils.State.populateModel;
 
 @Controller
 public class CommentController {
@@ -25,7 +25,7 @@ public class CommentController {
 
     @RequestMapping(value = { "/", "/add" }, method = GET)
     public String index(Model model, HttpServletRequest request) {
-		populateStateIntoModel(model, request);
+		populateModel(model, request);
         model.addAttribute("comments", repository.findAll());
         return "index";
     }

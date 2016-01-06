@@ -43,7 +43,7 @@ public class ReactErrorController extends AbstractErrorController {
 		response.setStatus(getStatus(request).value());
 		model.addAttribute("errors", getErrorAttributes(request, isIncludeStackTrace(request)));
 
-		State.populateStateIntoModel(model, request);
+		State.populateModel(model, request);
 
 		return "index";
 	}
