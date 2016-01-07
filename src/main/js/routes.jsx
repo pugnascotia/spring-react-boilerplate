@@ -4,10 +4,14 @@ import { Route, IndexRoute } from 'react-router';
 import App from './containers/App';
 import { AddComment, CommentList, Errors, SignIn } from './components';
 
-function routes(auth) {
+function routes(store) {
+
+  function signedIn() {
+    return store.getState().auth.signedIn === true;
+  }
 
   function requireAuth(nextState, replaceState) {
-    if (!auth.signedIn()) {
+    if (!signedIn()) {
       replaceState({nextPathname: nextState.location.pathname}, '/signin')
     }
   }

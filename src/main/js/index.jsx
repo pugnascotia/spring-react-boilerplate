@@ -18,9 +18,6 @@ import createHistory from 'history/lib/createBrowserHistory';
 /* Link state to route with redux-simple-router */
 import { syncReduxAndRouter } from 'redux-simple-router';
 
-/* A store-connected authentication helper */
-import auth from './auth';
-
 /* Our routing rules (actually a function that takes an auth and returns the rules) */
 import routes from './routes';
 
@@ -38,7 +35,7 @@ if (typeof window !== 'undefined') {
   let app = (
     <Provider store={store}>
       <Router history={history}>
-        {routes(auth(store))}
+        {routes(store)}
       </Router>
     </Provider>
   );
@@ -50,7 +47,7 @@ export function renderApp(path, state) {
   let store = createStoreWithMiddleware(reducer, state);
   let renderResult = '';
 
-  match({ routes: routes(auth(store)), location: path }, (error, redirectLocation, renderProps) => {
+  match({ routes: routes(store), location: path }, (error, redirectLocation, renderProps) => {
     if (renderProps) {
       renderResult = renderToString(
         <Provider store={store}>
