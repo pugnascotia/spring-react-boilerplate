@@ -24,8 +24,6 @@ import auth from './auth';
 /* Our routing rules (actually a function that takes an auth and returns the rules) */
 import routes from './routes';
 
-import Errors from './components/Errors';
-
 // applyMiddleware supercharges createStore with middleware:
 let createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
