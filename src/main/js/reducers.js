@@ -1,12 +1,21 @@
 import { combineReducers } from 'redux';
 import { routeReducer } from 'redux-simple-router';
-import { ADD_COMMENT, AUTHENTICATED, LOGGED_OUT } from './actions';
+import { ADD_COMMENT, COMMENTS_REFRESHED, AUTHENTICATED, LOGGED_OUT } from './actions';
 
-function commentsReducer(state = [], action) {
+function commentsReducer(state = {status: "stale", data: []}, action) {
 
   switch (action.type) {
     case ADD_COMMENT:
-      return state.concat(action.comment);
+      return {
+        status: state.status,
+        data: state.data.concat(action.comment)
+      };
+
+    case COMMENTS_REFRESHED:
+      return {
+        status: "loaded",
+        data: action.comments
+      };
 
     default:
       return state;

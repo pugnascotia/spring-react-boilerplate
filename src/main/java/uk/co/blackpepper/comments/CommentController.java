@@ -1,5 +1,7 @@
 package uk.co.blackpepper.comments;
 
+import java.util.HashMap;
+import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,7 +28,14 @@ public class CommentController {
     @RequestMapping(value = { "/", "/add" }, method = GET)
     public String index(Model model, HttpServletRequest request) {
 		populateModel(model, request);
-        model.addAttribute("comments", repository.findAll());
+        model.addAttribute("comments", getCommentsState());
         return "index";
     }
+
+	private Map<String, Object> getCommentsState() {
+		Map<String,Object> state = new HashMap<>();
+		state.put("status", "loaded");
+		state.put("data", repository.findAll());
+		return state;
+	}
 }
