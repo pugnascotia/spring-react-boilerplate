@@ -4,7 +4,7 @@ var path = require('path');
 var TARGET = process.env.npm_lifecycle_event;
 
 var SRC  = path.resolve(__dirname, 'src/main/js');
-var DEST = path.resolve(__dirname, 'src/main/resources/static/js');
+var DEST = path.resolve(__dirname, 'src/main/resources/static/app');
 
 var config = {
   entry: SRC,
@@ -14,7 +14,7 @@ var config = {
   output: {
     path: DEST,
     filename: 'bundle.js',
-    publicPath: '/js/',
+    publicPath: '/app/',
     library: 'ReactDemo'
   },
   module: {
@@ -41,7 +41,7 @@ var config = {
         prependPath: false
       }
     },
-    publicPath: 'http://localhost:9090/js/'
+    publicPath: 'http://localhost:9090/app/'
   },
   devtool: 'source-map'
 };

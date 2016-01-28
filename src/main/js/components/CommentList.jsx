@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import Comment from './Comment';
 import { refreshComments } from '../actions';
 
+require('./CommentList.less');
+
 class CommentList extends React.Component {
 
   componentDidMount() {
@@ -27,7 +29,9 @@ class CommentList extends React.Component {
           {' '}
           <a className="btn btn-default" onClick={(e) => this.handleRefreshComments(e)}>Refresh</a>
         </div>
-        { this.props.comments.map(m => <Comment author={m.author} content={m.content} key={m.id} />) }
+        { this.props.comments.length === 0
+            ? <p>No comments yet! You could add one&hellip;?</p>
+            : this.props.comments.map(m => <Comment author={m.author} content={m.content} key={m.id} />) }
       </div>
     );
   }

@@ -9,8 +9,9 @@ Yes, but with Java. It's inspired by the
 [spring-react-isomorphic](https://github.com/sdeleuze/spring-react-isomorphic)
 project, but uses:
 
-- [Webpack](https://github.com/webpack/webpack) to bundle all the JavaScript and dependencies
-- [Babel](https://babeljs.io/) for ES6 syntax
+- [Webpack](https://github.com/webpack/webpack) to bundle all the
+  JavaScript and dependencies, plus LESS + CSS handling.
+- [Babel](https://babeljs.io/) for ES6 syntax (currently using Babel 5)
 - [Hot module reloading
   (HMR)](https://github.com/gaearon/react-transform-hmr) of React components
 - [Redux](https://github.com/rackt/redux) to manage state, both in the

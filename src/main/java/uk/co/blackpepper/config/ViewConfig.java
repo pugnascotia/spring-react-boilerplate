@@ -27,7 +27,7 @@ public class ViewConfig {
         "static/js/polyfill.js",
         "static/js/ejs.min.js",
         "static/js/render.js",
-        "static/js/bundle.js"
+        "static/app/bundle.js"
     };
 
 	/**
