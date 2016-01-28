@@ -3,6 +3,6 @@ target
 react-demo.iml
 node
 node_modules/
-bundle.js*
+bundle.*
 *.bak
 *.iml
