@@ -15,7 +15,7 @@ export function addComment(comment) {
 }
 
 export function saveComment(author, content) {
-  return (dispatch,getState) => {
+  return dispatch => {
     axios.post('/api/comments', {author, content})
       .then(
         success => dispatch(addComment(success.data)),
@@ -25,7 +25,7 @@ export function saveComment(author, content) {
 }
 
 export function refreshComments() {
-  return (dispatch,getState) => {
+  return dispatch => {
     axios.get('/api/comments')
       .then(
         success => dispatch(commentsRefreshed(success.data)),

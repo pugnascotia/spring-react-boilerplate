@@ -20,6 +20,7 @@ project, but uses:
   on client and server
 - [redux-simple-router](https://github.com/jlongster/redux-simple-router)
   to sync redux and react-router
+- Linting integrated with Webpack via [eslint](https://github.com/MoOx/eslint-loader)
 
 ## Other Goodies
 

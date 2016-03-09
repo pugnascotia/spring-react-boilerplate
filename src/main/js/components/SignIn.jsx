@@ -36,7 +36,10 @@ class SignIn extends React.Component {
 
           this.context.history.replaceState(null, nextPathName);
         },
-        failure => this.setState({authFailed: true})
+        failure => {
+          console.error(failure);
+          this.setState({authFailed: true});
+        }
       );
   }
 

@@ -1,4 +1,4 @@
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var path = require('path');
 
 var TARGET = process.env.npm_lifecycle_event;
@@ -18,6 +18,13 @@ var config = {
     library: 'ReactDemo'
   },
   module: {
+    preLoaders: [
+      {
+        test: /\.jsx?$/,
+        loaders: ['eslint'],
+        include: SRC
+      }
+    ],
     loaders: [
       {
         test: /\.jsx?$/,
@@ -26,7 +33,7 @@ var config = {
       },
       {
         test: /\.(?:css|less)$/,
-        loader: "style-loader!css-loader!less-loader"
+        loader: 'style-loader!css-loader!less-loader'
       }
     ]
   },
@@ -50,10 +57,10 @@ var config = {
  * use breaks hot-reloading.
  */
 if (TARGET === 'build') {
-  config.plugins.push(new ExtractTextPlugin("bundle.css", { allChunks: true }));
+  config.plugins.push(new ExtractTextPlugin('bundle.css', { allChunks: true }));
 
-  config.module.loaders.find(each => each.loader === "style-loader!css-loader!less-loader").loader =
-    ExtractTextPlugin.extract("style-loader", "css-loader!less-loader");
+  config.module.loaders.find(each => each.loader === 'style-loader!css-loader!less-loader').loader =
+    ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader');
 }
 
 module.exports = config;

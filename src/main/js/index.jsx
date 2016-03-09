@@ -12,7 +12,7 @@ import { Provider } from 'react-redux'
 import reducer from './reducers';
 
 /* Routing with react-router */
-import { Router, Route, IndexRoute, RoutingContext, match } from 'react-router';
+import { Router, RoutingContext, match } from 'react-router';
 import createHistory from 'history/lib/createBrowserHistory';
 
 /* Link state to route with redux-simple-router */
@@ -56,7 +56,7 @@ export function renderApp(path, state) {
       );
     }
     else {
-      console.error("Failed to render app for path [" + path + "], error: [" + error + "]");
+      console.error(`Failed to render app for path [${path}], error: [${error}]`);
     }
   });
 

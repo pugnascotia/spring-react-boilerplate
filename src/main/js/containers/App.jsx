@@ -10,16 +10,16 @@ class App extends React.Component {
   handleSignOut() {
     axios.post('/api/signout')
       .then(
-        success => {
+        (/*success*/) => {
           this.props.dispatch(loggedOut());
-          this.context.history.replaceState(null, "/")
+          this.context.history.replaceState(null, '/')
         },
-        failure => console.error("Failed to log out successfully")
+        failure => console.error(`Failed to log out successfully: ${failure}`)
       );
   }
 
   adminMenu() {
-    return this.props.auth.roles.some(r => r === "ROLE_ADMIN")
+    return this.props.auth.roles.some(r => r === 'ROLE_ADMIN')
       ? (<li className="dropdown">
       <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span className="caret"></span></a>
       <ul className="dropdown-menu">

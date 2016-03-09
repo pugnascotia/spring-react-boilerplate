@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { routeReducer } from 'redux-simple-router';
 import { ADD_COMMENT, COMMENTS_REFRESHED, AUTHENTICATED, LOGGED_OUT } from './actions';
 
-function commentsReducer(state = {status: "stale", data: []}, action) {
+function commentsReducer(state = {status: 'stale', data: []}, action) {
 
   switch (action.type) {
     case ADD_COMMENT:
@@ -13,7 +13,7 @@ function commentsReducer(state = {status: "stale", data: []}, action) {
 
     case COMMENTS_REFRESHED:
       return {
-        status: "loaded",
+        status: 'loaded',
         data: action.comments
       };
 
