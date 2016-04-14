@@ -12,7 +12,7 @@ class App extends React.Component {
       .then(
         (/*success*/) => {
           this.props.dispatch(loggedOut());
-          this.context.history.replaceState(null, '/')
+          this.context.router.replace('/');
         },
         failure => console.error(`Failed to log out successfully: ${failure}`)
       );
@@ -70,7 +70,7 @@ class App extends React.Component {
   }
 }
 
-App.contextTypes = { history: PropTypes.history };
+App.contextTypes = { router: PropTypes.router.isRequired };
 
 function mapStateToProps(state) {
   return { auth: state.auth };

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { routeReducer } from 'redux-simple-router';
+import { routerReducer } from 'react-router-redux';
 import { ADD_COMMENT, COMMENTS_REFRESHED, AUTHENTICATED, LOGGED_OUT } from './actions';
 
 function commentsReducer(state = {status: 'stale', data: []}, action) {
@@ -51,7 +51,7 @@ const reducer = combineReducers(Object.assign({}, {
   auth: authReducer,
   comments: commentsReducer,
   errors: errorsReducer,
-  routing: routeReducer
+  routing: routerReducer
 }));
 
 export default reducer;

@@ -12,7 +12,7 @@ class AddComment extends React.Component {
 
   handleOnSubmit(e) {
     e.preventDefault();
-    
+
     const author = this.refs.author;
     const content = this.refs.content;
 
@@ -21,7 +21,7 @@ class AddComment extends React.Component {
     author.value = '';
     content.value = '';
 
-    this.context.history.pushState(null, '/');
+    this.context.router.push('/');
   }
 
   render() {
@@ -43,7 +43,7 @@ class AddComment extends React.Component {
   }
 }
 
-AddComment.contextTypes = { history: PropTypes.history };
+AddComment.contextTypes = { router: PropTypes.router.isRequired };
 
 /* Inject dispatch() but no state into props */
 export default connect()(AddComment);

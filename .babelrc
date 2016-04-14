@@ -1,5 +1,8 @@
 {
-  "stage": 0,
+  "presets": [
+    "es2015",
+    "react"
+  ],
   "env": {
     // only enable it when process.env.NODE_ENV is 'development' or undefined
     "development": {

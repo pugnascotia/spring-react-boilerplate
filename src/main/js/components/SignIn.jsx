@@ -15,7 +15,7 @@ class SignIn extends React.Component {
 
   handleOnSignIn(event) {
     event.preventDefault();
-    
+
     let username = this.refs.username.value.trim();
     let password = this.refs.password.value.trim();
 
@@ -32,9 +32,9 @@ class SignIn extends React.Component {
           this.props.dispatch(authenticated(success.data));
 
           const { location } = this.props;
-          const nextPathName = location.state && location.state.nextPathname ? location.state.nextPathname : '/';
+          const nextPathname = location.state && location.state.nextPathname ? location.state.nextPathname : '/';
 
-          this.context.history.replaceState(null, nextPathName);
+          this.context.router.replace(nextPathname);
         },
         failure => {
           console.error(failure);
@@ -78,7 +78,7 @@ class SignIn extends React.Component {
   }
 }
 
-SignIn.contextTypes = { history: PropTypes.history };
+SignIn.contextTypes = { router: PropTypes.router.isRequired };
 
 function mapStateToProps(state) {
   return { auth: state.auth };

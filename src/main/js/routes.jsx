@@ -4,15 +4,20 @@ import { Route, IndexRoute } from 'react-router';
 import App from './containers/App';
 import { AddComment, CommentList, Errors, SignIn } from './components';
 
-function routes(store) {
+function buildRoutes(store) {
 
   function signedIn() {
     return store.getState().auth.signedIn === true;
   }
 
-  function requireAuth(nextState, replaceState) {
+  function requireAuth(nextState, replace) {
     if (!signedIn()) {
-      replaceState({nextPathname: nextState.location.pathname}, '/signin')
+      replace({
+        pathname: '/signin',
+        state: {
+          nextPathname: nextState.location.pathname
+        }
+      });
     }
   }
 
@@ -26,4 +31,4 @@ function routes(store) {
   );
 }
 
-export default routes;
+export default buildRoutes;
