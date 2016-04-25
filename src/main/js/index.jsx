@@ -6,10 +6,8 @@ import { render } from 'react-dom';
 import { renderToString } from 'react-dom/server';
 
 /* State management with redux */
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk'
+import createStore from './store';
 import { Provider } from 'react-redux'
-import reducer from './reducers';
 
 /* Routing with react-router */
 import { Router, RouterContext, match } from 'react-router';
@@ -21,12 +19,9 @@ import { syncHistoryWithStore } from 'react-router-redux';
 /* Our routing rules (actually a function that takes an auth and returns the rules) */
 import buildRoutes from './routes';
 
-// applyMiddleware supercharges createStore with middleware:
-let createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
-
 if (typeof window !== 'undefined') {
 
-  const store = createStoreWithMiddleware(reducer, window.__INITIAL_STATE__);
+  const store = createStore(window.__INITIAL_STATE__);
 
   const history = syncHistoryWithStore(browserHistory, store);
 
@@ -40,12 +35,21 @@ if (typeof window !== 'undefined') {
 
   render(app, document.getElementById('mount'));
 }
+else {
+  // When running in Nashorn, the process object doesn't exist. Define it
+  // so that when the React code tests for production mode, it succeeds.
+  process = {
+    env: {
+      NODE_ENV: 'production'
+    }
+  };
+}
 
-export function renderApp(path : string, state : Object) : string {
-  let store = createStoreWithMiddleware(reducer, state);
+export function renderApp(path, state) : string {
+  const store = createStore(state);
   let renderResult = '';
 
-  match({ routes: buildRoutes(store), location: path }, (error: Object, redirectLocation: Object, renderProps: Object) => {
+  match({ routes: buildRoutes(store), location: path }, (error, redirectLocation, renderProps) => {
     if (renderProps) {
       renderResult = renderToString(
         <Provider store={store}>

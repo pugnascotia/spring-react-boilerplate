@@ -1,5 +1,5 @@
 import React from 'react';
-import { IndexLink, PropTypes } from 'react-router';
+import { IndexLink, routerShape } from 'react-router';
 import { connect } from 'react-redux';
 
 import { saveComment } from '../actions';
@@ -43,7 +43,7 @@ class AddComment extends React.Component {
   }
 }
 
-AddComment.contextTypes = { router: PropTypes.router.isRequired };
+AddComment.contextTypes = { router: routerShape.isRequired };
 
 /* Inject dispatch() but no state into props */
 export default connect()(AddComment);

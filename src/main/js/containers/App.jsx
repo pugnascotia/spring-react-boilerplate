@@ -1,5 +1,5 @@
 import React from 'react';
-import { IndexLink, Link, PropTypes } from 'react-router';
+import { IndexLink, Link, routerShape } from 'react-router';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
@@ -70,7 +70,7 @@ class App extends React.Component {
   }
 }
 
-App.contextTypes = { router: PropTypes.router.isRequired };
+App.contextTypes = { router: routerShape.isRequired };
 
 function mapStateToProps(state) {
   return { auth: state.auth };
