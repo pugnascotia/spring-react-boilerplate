@@ -13,9 +13,6 @@ import { Provider } from 'react-redux'
 import { Router, RouterContext, match } from 'react-router';
 import { browserHistory } from 'react-router'
 
-/* Link state to route with react-router-redux */
-import { syncHistoryWithStore } from 'react-router-redux';
-
 /* Our routing rules (actually a function that takes an auth and returns the rules) */
 import buildRoutes from './routes';
 
@@ -23,11 +20,9 @@ if (typeof window !== 'undefined') {
 
   const store = createStore(window.__INITIAL_STATE__);
 
-  const history = syncHistoryWithStore(browserHistory, store);
-
   let app = (
     <Provider store={store}>
-      <Router history={history}>
+      <Router history={browserHistory}>
         {buildRoutes(store)}
       </Router>
     </Provider>
