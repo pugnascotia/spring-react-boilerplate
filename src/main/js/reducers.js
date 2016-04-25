@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
 import { ADD_COMMENT, COMMENTS_REFRESHED, AUTHENTICATED, LOGGED_OUT } from './actions';
 
 function commentsReducer(state = {status: 'stale', data: []}, action) {
@@ -50,8 +49,7 @@ function errorsReducer(state = {} /*, action */) {
 const reducer = combineReducers(Object.assign({}, {
   auth: authReducer,
   comments: commentsReducer,
-  errors: errorsReducer,
-  routing: routerReducer
+  errors: errorsReducer
 }));
 
 export default reducer;

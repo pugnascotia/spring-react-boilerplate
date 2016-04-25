@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { PropTypes } from 'react-router';
+import { routerShape } from 'react-router';
 
 import axios from 'axios';
 
@@ -78,7 +78,7 @@ class SignIn extends React.Component {
   }
 }
 
-SignIn.contextTypes = { router: PropTypes.router.isRequired };
+SignIn.contextTypes = { router: routerShape.isRequired };
 
 function mapStateToProps(state) {
   return { auth: state.auth };
