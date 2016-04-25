@@ -13,8 +13,7 @@
     "node": true
   },
   "plugins": [
-    "react",
-    "flowtype"
+    "react"
   ],
   "rules": {
     "no-console": 0,
@@ -27,31 +26,6 @@
     "jsx-quotes": 1,
     "react/jsx-no-undef": 1,
     "react/jsx-uses-react": 1,
-    "react/jsx-uses-vars": 1,
-    "flowtype/require-parameter-type": 1,
-    "flowtype/require-return-type": [
-      1,
-      "always",
-      {
-        "annotateUndefined": "never"
-      }
-    ],
-    "flowtype/space-after-type-colon": [
-      1,
-      "always"
-    ],
-    "flowtype/space-before-type-colon": [
-      1,
-      "never"
-    ],
-    "flowtype/type-id-match": [
-      1,
-      "^([A-Z][a-z0-9]+)+Type$"
-    ]
-  },
-  "settings": {
-    "flowtype": {
-      "onlyFilesWithFlowAnnotation": true
-    }
+    "react/jsx-uses-vars": 1
   }
 }

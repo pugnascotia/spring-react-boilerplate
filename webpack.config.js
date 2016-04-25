@@ -62,11 +62,5 @@ if (TARGET === 'build') {
   config.module.loaders.find(each => each.loader === 'style-loader!css-loader!less-loader').loader =
     ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader');
 }
-else {
-  // Check the project with flow. Types get stripped regardless due to the
-  // babel react preset.
-  var FlowStatusWebpackPlugin = require('flow-status-webpack-plugin');
-  config.plugins.push(new FlowStatusWebpackPlugin());
-}
 
 module.exports = config;

@@ -22,7 +22,6 @@ project, but uses:
 - [react-router-redux](https://github.com/reactjs/react-router-redux)
   to sync redux and react-router
 - Linting integrated with Webpack via [eslint](https://github.com/MoOx/eslint-loader)
-- Type checking with [Flow](http://flowtype.org/) during development mode (see
 below).
 
 ## Other Goodies
@@ -45,8 +44,7 @@ Execute `mvn` if you have Maven already installed, or `./mvnw` if you don't. You
 [Java8 installed](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) either way at
 a minimum version of 1.8.0_65.
 
-Run webpack in hot-module reloading mode with: `npm run watch`. This will also
-perform Flow type checking for files that have opted-in.
+Run webpack in hot-module reloading mode with: `npm run watch`.
 
 ## Conventions
 

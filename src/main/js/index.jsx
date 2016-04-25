@@ -1,4 +1,3 @@
-/* @flow */
 /* React, browser and server rendering functions. We need the
  * first import, even though it isn't explicitly referenced
  * in this file, in order to avoid runtime errors. */
@@ -46,7 +45,6 @@ export function renderApp(path : string, state : Object) : string {
   let store = createStoreWithMiddleware(reducer, state);
   let renderResult = '';
 
-  // TODO: Meaningful Flow type declarations for the callback.
   match({ routes: buildRoutes(store), location: path }, (error: Object, redirectLocation: Object, renderProps: Object) => {
     if (renderProps) {
       renderResult = renderToString(
