@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Comment from './Comment';
 import { refreshComments } from '../actions';
 
-require('./CommentList.less');
+import './CommentList.less';
 
 class CommentList extends React.Component {
 
