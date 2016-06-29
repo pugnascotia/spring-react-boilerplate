@@ -19,8 +19,7 @@ project, but uses:
   client and when rendering on the server.
 - [react-router](https://github.com/rackt/react-router) for page routing,
   on client and server
-- Linting integrated with Webpack via [eslint](https://github.com/MoOx/eslint-loader)
-below).
+- Linting integrated with Webpack via [eslint](https://github.com/MoOx/eslint-loader).
 
 ## Other Goodies
 
