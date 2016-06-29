@@ -11,8 +11,7 @@ project, but uses:
 
 - [Webpack](https://github.com/webpack/webpack) to bundle all the
   JavaScript and dependencies, plus LESS + CSS handling.
-- [Babel](https://babeljs.io/) for ES6 syntax, using Babel 6 with the "es2016"
-- and "react" presets.
+- [Babel](https://babeljs.io/) for ES6 syntax, using Babel 6 with the "es2016" and "react" presets.
 - [Hot module reloading
   (HMR)](https://github.com/gaearon/react-transform-hmr) of React components
 - [Redux](https://github.com/rackt/redux) to manage state, both in the
