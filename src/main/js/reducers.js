@@ -1,8 +1,7 @@
 import { combineReducers } from 'redux';
 import { ADD_COMMENT, COMMENTS_REFRESHED, AUTHENTICATED, LOGGED_OUT } from './actions';
 
-function commentsReducer(state = {status: 'stale', data: []}, action) {
-
+function commentsReducer(state = { status: 'stale', data: [] }, action) {
   switch (action.type) {
     case ADD_COMMENT:
       return {
@@ -21,8 +20,7 @@ function commentsReducer(state = {status: 'stale', data: []}, action) {
   }
 }
 
-function authReducer(state = {signedIn: false, roles: []}, action) {
-
+function authReducer(state = { signedIn: false, roles: [] }, action) {
   switch (action.type) {
     case AUTHENTICATED:
       return Object.assign({}, state, {
@@ -41,7 +39,7 @@ function authReducer(state = {signedIn: false, roles: []}, action) {
   }
 }
 
-function errorsReducer(state = {} /*, action */) {
+function errorsReducer(state = {} /* , action */) {
   return state;
 }
 

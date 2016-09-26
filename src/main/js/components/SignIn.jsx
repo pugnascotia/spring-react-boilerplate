@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { routerShape } from 'react-router';
 
@@ -10,21 +10,21 @@ class SignIn extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {authFailed: false};
+    this.state = { authFailed: false };
   }
 
   handleOnSignIn(event) {
     event.preventDefault();
 
-    let username = this.refs.username.value.trim();
-    let password = this.refs.password.value.trim();
+    const username = this.usernameInput.value.trim();
+    const password = this.passwordInput.value.trim();
 
     if (username.length === 0) {
       return;
     }
 
-    let data = 'username=' + encodeURIComponent(username)
-      + '&password=' + encodeURIComponent(password);
+    const data = `username=${encodeURIComponent(username)
+       }&password=${encodeURIComponent(password)}`;
 
     axios.post('/api/authenticate', data)
       .then(
@@ -38,22 +38,27 @@ class SignIn extends React.Component {
         },
         failure => {
           console.error(failure);
-          this.setState({authFailed: true});
+          this.setState({ authFailed: true });
         }
       );
   }
 
   authFailedMessage() {
-    return this.state.authFailed
-      ? (<div className="row">
-          <div className="col-xs-12 col-sm-6 col-sm-offset-3 alert alert-danger" role="alert">Authentication failed!</div>
-        </div>)
-      : null;
+    if (!this.state.authFailed) {
+      return null;
+    }
+
+    return (
+      <div className="row">
+        <div className="col-xs-12 col-sm-6 col-sm-offset-3 alert alert-danger" role="alert">
+          Authentication failed!
+        </div>
+      </div>);
   }
 
   render() {
     return (
-      <form onSubmit={(e) => this.handleOnSignIn(e)}>
+      <form onSubmit={e => this.handleOnSignIn(e)}>
         <div className="row">
           <div className="col-sm-6 col-sm-offset-3">
             <h1>Sign In</h1>
@@ -62,12 +67,12 @@ class SignIn extends React.Component {
         {this.authFailedMessage()}
         <div className="row">
           <div className="col-sm-6 col-sm-offset-3 form-group">
-            <label>Username</label>
-            <input className="form-control" ref="username" />
+            <label htmlFor="userInput">Username</label>
+            <input id="userInput" className="form-control" ref={el => { this.usernameInput = el; }} />
           </div>
           <div className="col-sm-6 col-sm-offset-3 form-group">
-            <label>Password</label>
-            <input className="form-control" ref="password" type="password" />
+            <label htmlFor="passInput">Password</label>
+            <input id="passInput" className="form-control" ref={el => { this.passwordInput = el; }} type="password" />
           </div>
           <div className="col-sm-6 col-sm-offset-3 form-group">
             <button type="submit" className="btn btn-primary">Sign In</button>
@@ -79,6 +84,11 @@ class SignIn extends React.Component {
 }
 
 SignIn.contextTypes = { router: routerShape.isRequired };
+
+SignIn.propTypes = {
+  dispatch: PropTypes.func,
+  location: PropTypes.object
+};
 
 function mapStateToProps(state) {
   return { auth: state.auth };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IndexLink, routerShape } from 'react-router';
 import { connect } from 'react-redux';
 
@@ -13,8 +13,8 @@ class AddComment extends React.Component {
   handleOnSubmit(e) {
     e.preventDefault();
 
-    const author = this.refs.author;
-    const content = this.refs.content;
+    const author = this.authorInput;
+    const content = this.contextInput;
 
     this.addComment(author.value.trim(), content.value.trim());
 
@@ -26,15 +26,15 @@ class AddComment extends React.Component {
 
   render() {
     return (
-      <form onSubmit={(e) => this.handleOnSubmit(e)}>
+      <form onSubmit={e => this.handleOnSubmit(e)}>
         <h1>Add Comment</h1>
         <div className="form-group">
-          <label>Author:</label>
-          <input className="form-control" type="text" size="50" ref="author"/>
+          <label htmlFor="author">Author:</label>
+          <input input="author" className="form-control" type="text" size={50} ref={el => { this.authorInput = el; }} />
         </div>
         <div className="form-group">
-          <label>Comment:</label>
-          <input className="form-control" type="text" size="50" ref="content"/>
+          <label htmlFor="comment">Comment:</label>
+          <input id="comment" className="form-control" type="text" size={50} ref={el => { this.contextInput = el; }} />
         </div>
         <IndexLink to="/" className="btn btn-primary">Back</IndexLink>
         {' '}
@@ -44,6 +44,10 @@ class AddComment extends React.Component {
 }
 
 AddComment.contextTypes = { router: routerShape.isRequired };
+
+AddComment.propTypes = {
+  dispatch: PropTypes.func
+};
 
 /* Inject dispatch() but no state into props */
 export default connect()(AddComment);

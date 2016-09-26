@@ -6,21 +6,20 @@ import { render } from 'react-dom';
 import { renderToString } from 'react-dom/server';
 
 /* State management with redux */
-import createStore from './store';
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 
 /* Routing with react-router */
-import { Router, RouterContext, match } from 'react-router';
-import { browserHistory } from 'react-router'
+import { Router, RouterContext, match, browserHistory } from 'react-router';
+
+import createStore from './store';
 
 /* Our routing rules (actually a function that takes an auth and returns the rules) */
 import buildRoutes from './routes';
 
 if (typeof window !== 'undefined') {
-
   const store = createStore(window.__INITIAL_STATE__);
 
-  let app = (
+  const app = (
     <Provider store={store}>
       <Router history={browserHistory}>
         {buildRoutes(store)}
@@ -31,6 +30,7 @@ if (typeof window !== 'undefined') {
   render(app, document.getElementById('mount'));
 }
 
+// eslint-disable-next-line import/prefer-default-export
 export function renderApp(path, state) {
   const store = createStore(state);
   let renderResult = '';

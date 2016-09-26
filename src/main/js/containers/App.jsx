@@ -1,4 +1,7 @@
-import React from 'react';
+/* eslint jsx-a11y/href-no-hash:"off" */
+/* I discourage you from leaving the above disabled - I've only done this as this is a demo app. */
+
+import React, { PropTypes } from 'react';
 import { IndexLink, Link, routerShape } from 'react-router';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -10,7 +13,7 @@ class App extends React.Component {
   handleSignOut() {
     axios.post('/api/signout')
       .then(
-        (/*success*/) => {
+        (/* success*/) => {
           this.props.dispatch(loggedOut());
           this.context.router.replace('/');
         },
@@ -21,21 +24,28 @@ class App extends React.Component {
   adminMenu() {
     return this.props.auth.roles.some(r => r === 'ROLE_ADMIN')
       ? (<li className="dropdown">
-      <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span className="caret"></span></a>
-      <ul className="dropdown-menu">
-        <li><a href="#">Action</a></li>
-        <li><a href="#">Another action</a></li>
-        <li><a href="#">Something else here</a></li>
-        <li role="separator" className="divider"></li>
-        <li><a href="#">Separated link</a></li>
-      </ul>
-    </li>)
+        <a
+          href="#"
+          className="dropdown-toggle"
+          data-toggle="dropdown"
+          role="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >Admin <span className="caret" /></a>
+        <ul className="dropdown-menu">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li role="separator" className="divider" />
+          <li><a href="#">Separated link</a></li>
+        </ul>
+      </li>)
       : null;
   }
 
   render() {
-    let authLink = this.props.auth.signedIn
-      ? <a onClick={() => this.handleSignOut()}>Sign Out</a>
+    const authLink = this.props.auth.signedIn
+      ? <button className="btn btn-link" onClick={() => this.handleSignOut()}>Sign Out</button>
       : <Link to="/signin">Sign In</Link>;
 
     return (
@@ -43,11 +53,18 @@ class App extends React.Component {
         <nav className="navbar navbar-inverse">
           <div className="container">
             <div className="navbar-header">
-              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <button
+                type="button"
+                className="navbar-toggle collapsed"
+                data-toggle="collapse"
+                data-target="#navbar"
+                aria-expanded="false"
+                aria-controls="navbar"
+              >
                 <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar"/>
-                <span className="icon-bar"/>
-                <span className="icon-bar"/>
+                <span className="icon-bar" />
+                <span className="icon-bar" />
+                <span className="icon-bar" />
               </button>
               <IndexLink to="/" className="navbar-brand">spring-react-boilerplate</IndexLink>
             </div>
@@ -69,6 +86,15 @@ class App extends React.Component {
     );
   }
 }
+
+App.propTypes = {
+  auth: PropTypes.shape({
+    roles: PropTypes.arrayOf(PropTypes.string),
+    signedIn: PropTypes.bool
+  }),
+  children: PropTypes.arrayOf(PropTypes.element),
+  dispatch: PropTypes.func
+};
 
 App.contextTypes = { router: routerShape.isRequired };
 

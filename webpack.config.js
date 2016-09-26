@@ -1,16 +1,16 @@
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
 
-var TARGET = process.env.npm_lifecycle_event;
+const TARGET = process.env.npm_lifecycle_event;
 
-var SRC  = path.resolve(__dirname, 'src/main/js');
-var DEST = path.resolve(__dirname, 'src/main/resources/static/app');
+const SRC = path.resolve(__dirname, 'src/main/js');
+const DEST = path.resolve(__dirname, 'src/main/resources/static/app');
 
-var config = {
+const config = {
   entry: SRC,
   resolve: {
-    extensions: ['', '.js', '.jsx' ]
+    extensions: ['', '.js', '.jsx']
   },
   output: {
     path: DEST,
@@ -60,15 +60,15 @@ var config = {
 if (TARGET === 'build') {
   config.plugins.push(new ExtractTextPlugin('bundle.css', { allChunks: true }));
 
-  const styleLoader = config.module.loaders.find(each => each.loader === "style-loader!css-loader!less-loader");
-  styleLoader.loader = ExtractTextPlugin.extract("style-loader", "css-loader!less-loader");
+  const styleLoader = config.module.loaders.find(each => each.loader === 'style-loader!css-loader!less-loader');
+  styleLoader.loader = ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader');
 
   config.devtool = 'source-map';
 
   config.plugins.push(
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': '"production"'
+        NODE_ENV: '"production"'
       }
     }),
     new webpack.optimize.UglifyJsPlugin({

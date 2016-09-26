@@ -1,20 +1,15 @@
 import React, { PropTypes } from 'react';
 
-class Comment extends React.Component {
-
-    render() {
-        return (
-            <div className="message">
-                <h3>{this.props.content}</h3>
-                <p>By {this.props.author}</p>
-            </div>
-        );
-    }
-}
+const Comment = props => (
+  <div className="message">
+    <h3>{props.content}</h3>
+    <p>By {props.author}</p>
+  </div>
+);
 
 Comment.propTypes = {
-    content: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired
+  content: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired
 };
 
 export default Comment;

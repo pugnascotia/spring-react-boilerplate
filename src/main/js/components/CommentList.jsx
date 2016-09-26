@@ -15,8 +15,7 @@ class CommentList extends React.Component {
     }
   }
 
-  handleRefreshComments(e) {
-    e.preventDefault();
+  handleRefreshComments() {
     this.props.dispatch(refreshComments());
   }
 
@@ -27,11 +26,11 @@ class CommentList extends React.Component {
         <div>
           <Link to="/add" className="btn btn-primary">Add Comment</Link>
           {' '}
-          <a className="btn btn-default" onClick={(e) => this.handleRefreshComments(e)}>Refresh</a>
+          <button className="btn btn-default" onClick={() => this.handleRefreshComments()}>Refresh</button>
         </div>
         { this.props.comments.length === 0
             ? <p>No comments yet! You could add one&hellip;?</p>
-            : this.props.comments.map(m => <Comment author={m.author} content={m.content} key={m.id} />) }
+            : this.props.comments.map(each => <Comment author={each.author} content={each.content} key={each.id} />) }
       </div>
     );
   }
@@ -42,7 +41,8 @@ CommentList.propTypes = {
   comments: PropTypes.arrayOf(PropTypes.shape({
     content: PropTypes.string,
     author: PropTypes.string
-  }).isRequired).isRequired
+  }).isRequired).isRequired,
+  dispatch: PropTypes.func
 };
 
 function mapStateToProps(state) {

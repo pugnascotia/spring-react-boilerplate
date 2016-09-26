@@ -1,31 +1,20 @@
 {
   "parser": "babel-eslint",
-  "extends": "eslint:recommended",
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "sourceType": "module"
-  },
+  "extends": "airbnb",
   "env": {
     "browser": true,
     "node": true
   },
-  "plugins": [
-    "react"
-  ],
   "rules": {
+    "arrow-parens": ["error", "as-needed"],
+    "brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
+    "comma-dangle": [2, "never"],
+    "max-len": ["error", 120],
     "no-console": 0,
-    "new-cap": 0,
-    "strict": 0,
+    "no-plusplus": 0,
+    "no-prototype-builtins": 0,
     "no-underscore-dangle": 0,
-    "no-use-before-define": 0,
-    "eol-last": 0,
-    "quotes": [2, "single"],
-    "jsx-quotes": 1,
-    "react/jsx-no-undef": 1,
-    "react/jsx-uses-react": 1,
-    "react/jsx-uses-vars": 1
+    "react/forbid-prop-types": 0,
+    "react/no-unescaped-entities": 0
   }
 }

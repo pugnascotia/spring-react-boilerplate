@@ -5,7 +5,6 @@ import App from './containers/App';
 import { AddComment, CommentList, Errors, SignIn } from './components';
 
 function buildRoutes(store) {
-
   function signedIn() {
     return store.getState().auth.signedIn === true;
   }
@@ -23,10 +22,10 @@ function buildRoutes(store) {
 
   return (
     <Route path="/" component={App}>
-      <IndexRoute component={CommentList}/>
-      <Route path="add" onEnter={requireAuth} component={AddComment}/>
-      <Route path="signin" component={SignIn}/>
-      <Route path="*" component={Errors}/>
+      <IndexRoute component={CommentList} />
+      <Route path="add" onEnter={requireAuth} component={AddComment} />
+      <Route path="signin" component={SignIn} />
+      <Route path="*" component={Errors} />
     </Route>
   );
 }
