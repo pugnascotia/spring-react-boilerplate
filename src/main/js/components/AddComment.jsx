@@ -1,16 +1,13 @@
 import React, { PropTypes } from 'react';
-import { IndexLink, routerShape } from 'react-router';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import { router as RouterType } from 'react-router/PropTypes';
 
 import { saveComment } from '../actions';
 
 class AddComment extends React.Component {
 
-  addComment(author, content) {
-    this.props.dispatch(saveComment(author, content));
-  }
-
-  handleOnSubmit(e) {
+  onSubmit(e) {
     e.preventDefault();
 
     const author = this.authorInput;
@@ -21,29 +18,35 @@ class AddComment extends React.Component {
     author.value = '';
     content.value = '';
 
-    this.context.router.push('/');
+    this.context.router.transitionTo('/');
+  }
+
+  addComment(author, content) {
+    this.props.dispatch(saveComment(author, content));
   }
 
   render() {
     return (
-      <form onSubmit={e => this.handleOnSubmit(e)}>
+      <form onSubmit={e => this.onSubmit(e)}>
         <h1>Add Comment</h1>
         <div className="form-group">
           <label htmlFor="author">Author:</label>
-          <input input="author" className="form-control" type="text" size={50} ref={el => { this.authorInput = el; }} />
+          <input id="author" className="form-control" type="text" size={50} ref={el => { this.authorInput = el; }} />
         </div>
         <div className="form-group">
           <label htmlFor="comment">Comment:</label>
           <input id="comment" className="form-control" type="text" size={50} ref={el => { this.contextInput = el; }} />
         </div>
-        <IndexLink to="/" className="btn btn-primary">Back</IndexLink>
+        <Link to="/" className="btn btn-primary">Back</Link>
         {' '}
         <button className="btn btn-success" type="submit">Submit</button>
       </form>);
   }
 }
 
-AddComment.contextTypes = { router: routerShape.isRequired };
+AddComment.contextTypes = {
+  router: RouterType.isRequired
+};
 
 AddComment.propTypes = {
   dispatch: PropTypes.func

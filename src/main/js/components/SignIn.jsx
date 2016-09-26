@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { routerShape } from 'react-router';
+import { router as RouterType } from 'react-router/PropTypes';
 
 import axios from 'axios';
 
@@ -34,7 +34,7 @@ class SignIn extends React.Component {
           const { location } = this.props;
           const nextPathname = location.state && location.state.nextPathname ? location.state.nextPathname : '/';
 
-          this.context.router.replace(nextPathname);
+          this.context.router.transitionTo(nextPathname);
         },
         failure => {
           console.error(failure);
@@ -83,16 +83,14 @@ class SignIn extends React.Component {
   }
 }
 
-SignIn.contextTypes = { router: routerShape.isRequired };
+SignIn.contextTypes = {
+  router: RouterType.isRequired
+};
 
 SignIn.propTypes = {
   dispatch: PropTypes.func,
   location: PropTypes.object
 };
 
-function mapStateToProps(state) {
-  return { auth: state.auth };
-}
-
-/* Inject all state and dispatch() into props */
-export default connect(mapStateToProps)(SignIn);
+/* Inject auth state and dispatch() into props */
+export default connect(state => ({ auth: state.auth }))(SignIn);

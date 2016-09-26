@@ -9,21 +9,20 @@ import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 
 /* Routing with react-router */
-import { Router, RouterContext, match, browserHistory } from 'react-router';
+import { BrowserRouter, ServerRouter, createServerRenderContext } from 'react-router';
+
+import App from './containers/App';
 
 import createStore from './store';
-
-/* Our routing rules (actually a function that takes an auth and returns the rules) */
-import buildRoutes from './routes';
 
 if (typeof window !== 'undefined') {
   const store = createStore(window.__INITIAL_STATE__);
 
   const app = (
     <Provider store={store}>
-      <Router history={browserHistory}>
-        {buildRoutes(store)}
-      </Router>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
   );
 
@@ -33,20 +32,35 @@ if (typeof window !== 'undefined') {
 // eslint-disable-next-line import/prefer-default-export
 export function renderApp(path, state) {
   const store = createStore(state);
-  let renderResult = '';
 
-  match({ routes: buildRoutes(store), location: path }, (error, redirectLocation, renderProps) => {
-    if (renderProps) {
-      renderResult = renderToString(
-        <Provider store={store}>
-          <RouterContext {...renderProps} />
-        </Provider>
-      );
-    }
-    else {
-      console.error(`Failed to render app for path [${path}], error: [${error}]`);
-    }
-  });
+  // first create a context for <ServerRouter>, it's where we keep the
+  // results of rendering for the second pass if necessary
+  const context = createServerRenderContext();
 
-  return renderResult;
+  function doRender() {
+    return renderToString(
+      <Provider store={store}>
+        <ServerRouter
+          location={path}
+          context={context}
+        >
+          <App />
+        </ServerRouter>
+      </Provider>
+    );
+  }
+
+  let markup = doRender();
+
+  const result = context.getResult();
+
+  // We ignore result.redirect because Spring should have handled that
+  // for us. If we got a miss, then perform a second render pass with
+  // the context to clue the <Miss> components into rendering
+  // this time (on the client they know from componentDidMount)
+  if (result.missed) {
+    markup = doRender();
+  }
+
+  return markup;
 }

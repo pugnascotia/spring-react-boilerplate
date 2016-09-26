@@ -2,9 +2,16 @@
 /* I discourage you from leaving the above disabled - I've only done this as this is a demo app. */
 
 import React, { PropTypes } from 'react';
-import { IndexLink, Link, routerShape } from 'react-router';
+import { Match, Miss, Link } from 'react-router';
+import { router as RouterType } from 'react-router/PropTypes';
 import { connect } from 'react-redux';
 import axios from 'axios';
+
+import MatchWhenAuthorized from './MatchWhenAuthorized';
+import AddComment from '../components/AddComment';
+import CommentList from '../components/CommentList';
+import Errors from '../components/Errors';
+import SignIn from '../components/SignIn';
 
 import { loggedOut } from '../actions';
 
@@ -14,8 +21,8 @@ class App extends React.Component {
     axios.post('/api/signout')
       .then(
         (/* success*/) => {
-          this.props.dispatch(loggedOut());
-          this.context.router.replace('/');
+          this.props.onSignOut();
+          this.context.router.transitionTo('/');
         },
         failure => console.error(`Failed to log out successfully: ${failure}`)
       );
@@ -66,12 +73,12 @@ class App extends React.Component {
                 <span className="icon-bar" />
                 <span className="icon-bar" />
               </button>
-              <IndexLink to="/" className="navbar-brand">spring-react-boilerplate</IndexLink>
+              <Link to="/" className="navbar-brand">spring-react-boilerplate</Link>
             </div>
             <div id="navbar" className="collapse navbar-right navbar-collapse">
               <ul className="nav navbar-nav">
                 {this.adminMenu()}
-                <li><IndexLink to="/">Home</IndexLink></li>
+                <li><Link to="/">Home</Link></li>
                 <li><Link to="/add">Add Comment</Link></li>
                 <li>{authLink}</li>
               </ul>
@@ -80,7 +87,10 @@ class App extends React.Component {
         </nav>
 
         <div className="container">
-          {this.props.children}
+          <Match exactly pattern="/" component={CommentList} />
+          <MatchWhenAuthorized pattern="/add" component={AddComment} />
+          <Match pattern="/signin" component={SignIn} />
+          <Miss component={Errors} />
         </div>
       </div>
     );
@@ -92,15 +102,15 @@ App.propTypes = {
     roles: PropTypes.arrayOf(PropTypes.string),
     signedIn: PropTypes.bool
   }),
-  children: PropTypes.arrayOf(PropTypes.element),
-  dispatch: PropTypes.func
+  onSignOut: PropTypes.func
 };
 
-App.contextTypes = { router: routerShape.isRequired };
+App.contextTypes = {
+  router: RouterType.isRequired
+};
 
-function mapStateToProps(state) {
-  return { auth: state.auth };
-}
-
-/* Inject all state and dispatch() into props */
-export default connect(mapStateToProps)(App);
+/* Inject auth state and a dispatch() wrapper into props */
+export default connect(
+  state => ({ auth: state.auth }),
+  dispatch => ({ onSignOut: () => dispatch(loggedOut()) })
+)(App);

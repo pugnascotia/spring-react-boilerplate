@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 const ServerError = () => (
@@ -15,9 +15,9 @@ const NotFound = () => (
   </div>
 );
 
-const Errors = () => {
-  const status = this.props.errors.hasOwnProperty('status')
-    ? Number.parseInt(this.props.errors.status, 10)
+const Errors = props => {
+  const status = props.errors.hasOwnProperty('status')
+    ? Number.parseInt(props.errors.status, 10)
     : 404;
 
   switch (status) {
@@ -29,9 +29,11 @@ const Errors = () => {
   }
 };
 
-function mapStateToProps(state) {
-  return { errors: state.errors };
-}
+Errors.propTypes = {
+  errors: PropTypes.shape({
+    status: PropTypes.number
+  })
+};
 
-/* Inject all state and dispatch() into props */
-export default connect(mapStateToProps)(Errors);
+/* Inject errors state and dispatch() into props */
+export default connect(state => ({ errors: state.errors }))(Errors);
