@@ -39,8 +39,10 @@ class CommentList extends React.Component {
 CommentList.propTypes = {
   status: PropTypes.string.isRequired,
   comments: PropTypes.arrayOf(PropTypes.shape({
+    /* eslint-disable react/no-unused-prop-types */
     content: PropTypes.string,
     author: PropTypes.string
+    /* eslint-enable react/no-unused-prop-types */
   }).isRequired).isRequired,
   dispatch: PropTypes.func
 };

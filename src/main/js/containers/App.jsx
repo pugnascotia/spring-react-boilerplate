@@ -43,10 +43,19 @@ class App extends React.Component {
       : null;
   }
 
+  authLink() {
+    if (!this.props.auth.signedIn) {
+      return <Link to="/signin">Sign In</Link>;
+    }
+
+    return (
+      <div className="navbar-form" style={{ paddingLeft: 0, paddingRight: 0 }}>
+        <button className="btn btn-link" onClick={() => this.handleSignOut()}>Sign Out</button>
+      </div>
+    );
+  }
+
   render() {
-    const authLink = this.props.auth.signedIn
-      ? <button className="btn btn-link" onClick={() => this.handleSignOut()}>Sign Out</button>
-      : <Link to="/signin">Sign In</Link>;
 
     return (
       <div>
@@ -73,7 +82,7 @@ class App extends React.Component {
                 {this.adminMenu()}
                 <li><IndexLink to="/">Home</IndexLink></li>
                 <li><Link to="/add">Add Comment</Link></li>
-                <li>{authLink}</li>
+                <li>{this.authLink()}</li>
               </ul>
             </div>
           </div>
