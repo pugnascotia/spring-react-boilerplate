@@ -1,3 +1,4 @@
+/* @flow */
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { routerShape } from 'react-router';
@@ -6,7 +7,14 @@ import axios from 'axios';
 
 import { authenticated } from '../actions';
 
+type State = {
+  authFailed: bool
+};
+
 class SignIn extends React.Component {
+  state: State;
+  usernameInput : HTMLInputElement;
+  passwordInput: HTMLInputElement;
 
   constructor(props) {
     super(props);
@@ -23,8 +31,7 @@ class SignIn extends React.Component {
       return;
     }
 
-    const data = `username=${encodeURIComponent(username)
-       }&password=${encodeURIComponent(password)}`;
+    const data = `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
 
     axios.post('/api/authenticate', data)
       .then(

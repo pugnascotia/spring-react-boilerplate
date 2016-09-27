@@ -1,10 +1,13 @@
+/* @flow */
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 import App from './containers/App';
 import { AddComment, CommentList, Errors, SignIn } from './components';
 
-function buildRoutes(store) {
+import type { Store } from './types';
+
+function buildRoutes(store : Store) {
   function signedIn() {
     return store.getState().auth.signedIn === true;
   }

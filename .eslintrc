@@ -6,7 +6,7 @@
     "node": true
   },
   "rules": {
-    "arrow-parens": ["error", "as-needed"],
+    "arrow-parens": 0,
     "brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
     "comma-dangle": [2, "never"],
     "max-len": ["error", 120],
@@ -15,6 +15,7 @@
     "no-prototype-builtins": 0,
     "no-underscore-dangle": 0,
     "react/forbid-prop-types": 0,
-    "react/no-unescaped-entities": 0
+    "react/no-unescaped-entities": 0,
+    "react/sort-comp": 0
   }
 }

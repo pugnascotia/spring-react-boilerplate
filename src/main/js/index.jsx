@@ -1,3 +1,4 @@
+/* @flow */
 /* React, browser and server rendering functions. We need the
  * first import, even though it isn't explicitly referenced
  * in this file, in order to avoid runtime errors. */
@@ -31,7 +32,7 @@ if (typeof window !== 'undefined') {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export function renderApp(path, state) {
+export function renderApp(path : string, state : Object) {
   const store = createStore(state);
   let renderResult = '';
 

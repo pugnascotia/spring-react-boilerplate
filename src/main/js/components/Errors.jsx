@@ -1,3 +1,4 @@
+/* @flow */
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -15,9 +16,13 @@ const NotFound = () => (
   </div>
 );
 
-const Errors = () => {
-  const status = this.props.errors.hasOwnProperty('status')
-    ? Number.parseInt(this.props.errors.status, 10)
+type Props = {
+  errors: { status: string }
+};
+
+const Errors = (props : Props) => {
+  const status = props.errors.hasOwnProperty('status')
+    ? Number.parseInt(props.errors.status, 10)
     : 404;
 
   switch (status) {

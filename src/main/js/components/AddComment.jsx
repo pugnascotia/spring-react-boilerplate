@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IndexLink, routerShape } from 'react-router';
 import { connect } from 'react-redux';
@@ -5,8 +6,10 @@ import { connect } from 'react-redux';
 import { saveComment } from '../actions';
 
 class AddComment extends React.Component {
+  authorInput : HTMLInputElement;
+  contextInput: HTMLInputElement;
 
-  addComment(author, content) {
+  addComment(author : string, content : string) : void {
     this.props.dispatch(saveComment(author, content));
   }
 

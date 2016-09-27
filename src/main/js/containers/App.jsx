@@ -1,3 +1,4 @@
+/* @flow */
 /* eslint jsx-a11y/href-no-hash:"off" */
 /* I discourage you from leaving the above disabled - I've only done this as this is a demo app. */
 
@@ -56,7 +57,6 @@ class App extends React.Component {
   }
 
   render() {
-
     return (
       <div>
         <nav className="navbar navbar-inverse">

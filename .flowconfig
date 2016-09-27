@@ -2,8 +2,10 @@
 src/main/js
 
 [ignore]
-<PROJECT_ROOT>/node/.*
-<PROJECT_ROOT>/bower_components/.*
-
+<PROJECT_ROOT>/.mvn/node/.*
 <PROJECT_ROOT>/node_modules/fbjs/.*
 <PROJECT_ROOT>/node_modules/json5/.*
+
+[options]
+module.name_mapper.extension='less' -> '<PROJECT_ROOT>/src/main/flow/StyleStub.js'
+
