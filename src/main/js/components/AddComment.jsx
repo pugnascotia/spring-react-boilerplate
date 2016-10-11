@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
@@ -6,6 +7,12 @@ import { router as RouterType } from 'react-router/PropTypes';
 import { saveComment } from '../actions';
 
 class AddComment extends React.Component {
+  authorInput : HTMLInputElement;
+  contextInput: HTMLInputElement;
+
+  addComment(author : string, content : string) : void {
+    this.props.dispatch(saveComment(author, content));
+  }
 
   onSubmit(e) {
     e.preventDefault();
@@ -19,10 +26,6 @@ class AddComment extends React.Component {
     content.value = '';
 
     this.context.router.transitionTo('/');
-  }
-
-  addComment(author, content) {
-    this.props.dispatch(saveComment(author, content));
   }
 
   render() {

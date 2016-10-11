@@ -19,6 +19,7 @@ project, but uses:
 - [react-router](https://github.com/rackt/react-router) for page routing,
   on client and server
 - Linting integrated with Webpack via [eslint](https://github.com/MoOx/eslint-loader).
+- Type checking with [Flow](https://flowtype.org/).
 
 ## Other Goodies
 

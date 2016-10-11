@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+/* @flow */
+import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
@@ -7,7 +8,20 @@ import { refreshComments } from '../actions';
 
 import './CommentList.less';
 
+import type { Dispatch } from '../types';
+
+type Props = {
+  status: string,
+  comments: Array<{
+    id: number,
+    content: string,
+    author: string
+  }>,
+  dispatch: Dispatch
+};
+
 class CommentList extends React.Component {
+  props: Props;
 
   componentDidMount() {
     if (this.props.status === 'stale') {
@@ -35,17 +49,6 @@ class CommentList extends React.Component {
     );
   }
 }
-
-CommentList.propTypes = {
-  status: PropTypes.string.isRequired,
-  comments: PropTypes.arrayOf(PropTypes.shape({
-    /* eslint-disable react/no-unused-prop-types */
-    content: PropTypes.string,
-    author: PropTypes.string
-    /* eslint-enable react/no-unused-prop-types */
-  }).isRequired).isRequired,
-  dispatch: PropTypes.func
-};
 
 function mapStateToProps(state) {
   return {

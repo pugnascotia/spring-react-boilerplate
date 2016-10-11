@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+/* @flow */
+import React from 'react';
 import { connect } from 'react-redux';
 
 const ServerError = () => (
@@ -15,7 +16,11 @@ const NotFound = () => (
   </div>
 );
 
-const Errors = props => {
+type Props = {
+  errors: { status: string }
+};
+
+const Errors = (props : Props) => {
   const status = props.errors.hasOwnProperty('status')
     ? Number.parseInt(props.errors.status, 10)
     : 404;

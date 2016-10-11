@@ -4,7 +4,8 @@
   "description": "Spring + React + Redux + React Router isomorphic templating application",
   "main": "index.js",
   "scripts": {
-    "build": "NODE_ENV=production webpack",
+    "build": "flow && NODE_ENV=production webpack",
+    "flow": "flow",
     "lint": "eslint . --ext .js --ext .jsx || true",
     "start": "webpack-dev-server --hot --inline"
   },
@@ -35,6 +36,7 @@
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-react": "^6.3.0",
     "extract-text-webpack-plugin": "^1.0.1",
+    "flow-bin": "^0.32.0",
     "history": "^4.2.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",

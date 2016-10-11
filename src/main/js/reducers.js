@@ -1,7 +1,15 @@
+/* @flow */
 import { combineReducers } from 'redux';
 import { ADD_COMMENT, COMMENTS_REFRESHED, AUTHENTICATED, LOGGED_OUT } from './actions';
 
-function commentsReducer(state = { status: 'stale', data: [] }, action) {
+import type { Action, Comment } from './types';
+
+type CommentsState = {
+  status: string,
+  data: Comment[]
+}
+
+function commentsReducer(state : CommentsState = { status: 'stale', data: [] }, action : Action) : CommentsState {
   switch (action.type) {
     case ADD_COMMENT:
       return {
@@ -20,7 +28,12 @@ function commentsReducer(state = { status: 'stale', data: [] }, action) {
   }
 }
 
-function authReducer(state = { signedIn: false, roles: [] }, action) {
+type AuthState = {
+  signedIn: bool,
+  roles: string[]
+};
+
+function authReducer(state : AuthState = { signedIn: false, roles: [] }, action : Action) : AuthState {
   switch (action.type) {
     case AUTHENTICATED:
       return Object.assign({}, state, {
@@ -43,7 +56,7 @@ function errorsReducer(state = {} /* , action */) {
   return state;
 }
 
-/* Combine the routing reducer with the application's reducer(s) */
+/* Combine the application's reducers */
 const reducer = combineReducers(Object.assign({}, {
   auth: authReducer,
   comments: commentsReducer,

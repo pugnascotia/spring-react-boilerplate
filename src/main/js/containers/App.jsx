@@ -1,3 +1,4 @@
+/* @flow */
 /* eslint jsx-a11y/href-no-hash:"off" */
 /* I discourage you from leaving the above disabled - I've only done this as this is a demo app. */
 
@@ -50,11 +51,19 @@ class App extends React.Component {
       : null;
   }
 
-  render() {
-    const authLink = this.props.auth.signedIn
-      ? <button className="btn btn-link" onClick={() => this.handleSignOut()}>Sign Out</button>
-      : <Link to="/signin">Sign In</Link>;
+  authLink() {
+    if (!this.props.auth.signedIn) {
+      return <Link to="/signin">Sign In</Link>;
+    }
 
+    return (
+      <div className="navbar-form" style={{ paddingLeft: 0, paddingRight: 0 }}>
+        <button className="btn btn-link" onClick={() => this.handleSignOut()}>Sign Out</button>
+      </div>
+    );
+  }
+
+  render() {
     return (
       <div>
         <nav className="navbar navbar-inverse">
@@ -80,7 +89,7 @@ class App extends React.Component {
                 {this.adminMenu()}
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/add">Add Comment</Link></li>
-                <li>{authLink}</li>
+                <li>{this.authLink()}</li>
               </ul>
             </div>
           </div>
