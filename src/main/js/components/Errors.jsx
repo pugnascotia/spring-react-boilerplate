@@ -17,18 +17,22 @@ const NotFound = () => (
 );
 
 type Props = {
-  errors: { status: string }
+  errors: {
+    // error: string,
+    // exception: string,
+    // message: string,
+    // path: string,
+    // timestamp: number,
+    status: number
+  }
 };
 
 const Errors = (props : Props) => {
-  const status = props.errors.hasOwnProperty('status')
-    ? Number.parseInt(props.errors.status, 10)
-    : 404;
-
-  switch (status) {
+  switch (props.errors.status) {
     case 500:
       return <ServerError />;
 
+    case 404:
     default:
       return <NotFound />;
   }

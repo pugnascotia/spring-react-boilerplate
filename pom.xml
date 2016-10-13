@@ -63,7 +63,7 @@
 	</dependencies>
 
 	<build>
-        <defaultGoal>clean spring-boot:run</defaultGoal>
+		<defaultGoal>clean spring-boot:run</defaultGoal>
 		<plugins>
 
 			<plugin>
@@ -76,13 +76,34 @@
 			</plugin>
 
 			<plugin>
+				<artifactId>exec-maven-plugin</artifactId>
+				<groupId>org.codehaus.mojo</groupId>
+				<executions>
+					<execution>
+						<id>Test bundle with Nashorn</id>
+						<!-- Ensure that Nashorn can load the bundle without errors. 'test' would arguably be a -->
+						<!-- more appropriate phase, but that doesn't get run with the default target. -->
+						<phase>test-compile</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>jjs</executable>
+							<commandlineArgs>${project.basedir}/src/test/js/test_bundle.js</commandlineArgs>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>
 				<version>0.0.26</version>
 
-        <configuration>
-          <installDirectory>.mvn</installDirectory>
-        </configuration>
+				<configuration>
+					<installDirectory>.mvn</installDirectory>
+				</configuration>
+
 				<executions>
 					<execution>
 						<id>Install Node and npm</id>
