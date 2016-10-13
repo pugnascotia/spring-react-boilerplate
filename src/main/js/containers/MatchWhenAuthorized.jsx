@@ -1,6 +1,7 @@
+/* @flow */
 import React, { PropTypes } from 'react';
 import { Match, Redirect } from 'react-router';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 const MatchWhenAuthorized = ({ component: Component, signedIn, ...rest }) => {
   const onComponentRender = props => (
@@ -23,10 +24,9 @@ MatchWhenAuthorized.propTypes = {
   signedIn: PropTypes.bool
 };
 
-// function mapStateToProps(state) {
-//   return { signedIn: state.auth.signedIn };
-// }
+function mapStateToProps(state) {
+  return { signedIn: state.auth.signedIn };
+}
 
 /* Inject auth state and dispatch() into props */
-// export default connect(mapStateToProps)(MatchWhenAuthorized);
-export default MatchWhenAuthorized;
+export default connect(mapStateToProps)(MatchWhenAuthorized);

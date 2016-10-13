@@ -57,12 +57,14 @@ const config = {
 /* Build bundle.css only if we're doing a prod build. This is because the plugin we
  * use breaks hot-reloading.
  */
-if (TARGET === 'build') {
+if (TARGET === 'build' || TARGET === 'debug') {
   config.plugins.push(new ExtractTextPlugin('bundle.css', { allChunks: true }));
 
   const styleLoader = config.module.loaders.find(each => each.loader === 'style-loader!css-loader!less-loader');
   styleLoader.loader = ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader');
+}
 
+if (TARGET === 'build') {
   config.devtool = 'source-map';
 
   config.plugins.push(

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "flow && NODE_ENV=production webpack",
+    "debug": "flow && NODE_ENV=debug webpack",
     "flow": "flow",
     "lint": "eslint . --ext .js --ext .jsx || true",
     "start": "webpack-dev-server --hot --inline"

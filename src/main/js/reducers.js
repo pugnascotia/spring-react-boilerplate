@@ -29,7 +29,7 @@ function commentsReducer(state : CommentsState = { status: 'stale', data: [] }, 
 }
 
 type AuthState = {
-  signedIn: bool,
+  signedIn: boolean,
   roles: string[]
 };
 

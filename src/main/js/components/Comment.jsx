@@ -1,5 +1,5 @@
 /* @flow */
-import React, { PropTypes } from 'react';
+import React from 'react';
 
 const Comment = (props : { content: string, author : string }) => (
   <div className="message">
@@ -7,10 +7,5 @@ const Comment = (props : { content: string, author : string }) => (
     <p>By {props.author}</p>
   </div>
 );
-
-Comment.propTypes = {
-  content: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired
-};
 
 export default Comment;

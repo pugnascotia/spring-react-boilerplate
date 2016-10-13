@@ -21,3 +21,15 @@ export type PromiseAction = Promise<Action>;
 export type Store = {
   getState: () => Object
 };
+
+export type Router = {
+  transitionTo: Function,
+  replaceWith: Function,
+  blockTransitions: Function,
+  createHref: Function
+};
+
+export type Auth = {
+  roles: String[],
+  signedIn: boolean
+};

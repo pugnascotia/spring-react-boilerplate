@@ -2,9 +2,9 @@
 /* eslint jsx-a11y/href-no-hash:"off" */
 /* I discourage you from leaving the above disabled - I've only done this as this is a demo app. */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Match, Miss, Link } from 'react-router';
-import { router as RouterType } from 'react-router/PropTypes';
+import { routerContext as RouterType } from 'react-router/PropTypes';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
@@ -16,7 +16,20 @@ import SignIn from '../components/SignIn';
 
 import { loggedOut } from '../actions';
 
+import type { Auth, Router } from '../types';
+
+type Props = {
+  auth: Auth,
+  onSignOut: Function
+};
+
+type Context = {
+  router: Router
+}
+
 class App extends React.Component {
+  props: Props;
+  context: Context;
 
   handleSignOut() {
     axios.post('/api/signout')
@@ -105,14 +118,6 @@ class App extends React.Component {
     );
   }
 }
-
-App.propTypes = {
-  auth: PropTypes.shape({
-    roles: PropTypes.arrayOf(PropTypes.string),
-    signedIn: PropTypes.bool
-  }),
-  onSignOut: PropTypes.func
-};
 
 App.contextTypes = {
   router: RouterType.isRequired

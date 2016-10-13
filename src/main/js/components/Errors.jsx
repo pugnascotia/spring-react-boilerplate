@@ -34,11 +34,5 @@ const Errors = (props : Props) => {
   }
 };
 
-Errors.propTypes = {
-  errors: PropTypes.shape({
-    status: PropTypes.number
-  })
-};
-
 /* Inject errors state and dispatch() into props */
 export default connect(state => ({ errors: state.errors }))(Errors);

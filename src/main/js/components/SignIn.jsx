@@ -1,18 +1,23 @@
 /* @flow */
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { router as RouterType } from 'react-router/PropTypes';
+import { routerContext as RouterType } from 'react-router/PropTypes';
 
 import axios from 'axios';
 
 import { authenticated } from '../actions';
 
+import type { Router } from '../types';
+
 type State = {
-  authFailed: bool
+  authFailed: boolean
 };
 
 class SignIn extends React.Component {
+  context: { router: Router };
+  props: { dispatch: Function, location: Object };
   state: State;
+
   usernameInput : HTMLInputElement;
   passwordInput: HTMLInputElement;
 
@@ -92,11 +97,6 @@ class SignIn extends React.Component {
 
 SignIn.contextTypes = {
   router: RouterType.isRequired
-};
-
-SignIn.propTypes = {
-  dispatch: PropTypes.func,
-  location: PropTypes.object
 };
 
 /* Inject auth state and dispatch() into props */
