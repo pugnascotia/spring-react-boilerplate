@@ -30,7 +30,9 @@ You also get:
   boilerplate
 - [Jackson](https://github.com/FasterXML/jackson) to serialize model data
   before rendering on the server. For more information, see
-  [this OpenJDK thread on the subject](http://mail.openjdk.java.net/pipermail/nashorn-dev/2013-September/002006.html)
+  [this OpenJDK thread on the subject](http://mail.openjdk.java.net/pipermail/nashorn-dev/2013-September/002006.html),
+  but summary is Nashorn won't (and actually can't) string-ify POJOs via
+  `JSON.stringify`, meaning it can't be used to serialise the Redux state.
 
 ## Caveats
 
@@ -52,7 +54,7 @@ suffixed with `Resource`, and handle requests under `/api`.
 
 ## Testing the webpack bundle
 
-In order to pre-empty runtime errors with Nashorn loading the bundle, a test
+In order to preempt runtime errors with Nashorn loading the bundle, a test
 script is executed by Maven during the `test-compile` phase, located at
 `src/test/js/test_bundle.js`. If this script fails, you can diagnose the problem
 by:
