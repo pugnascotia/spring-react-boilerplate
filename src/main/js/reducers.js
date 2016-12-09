@@ -2,7 +2,7 @@
 import { combineReducers } from 'redux';
 import { ADD_COMMENT, COMMENTS_REFRESHED, AUTHENTICATED, LOGGED_OUT } from './actions';
 
-import type { Action, Comment } from './types';
+import type { Action, Comment, Role } from './types';
 
 type CommentsState = {
   status: string,
@@ -30,7 +30,7 @@ function commentsReducer(state : CommentsState = { status: 'stale', data: [] }, 
 
 type AuthState = {
   signedIn: boolean,
-  roles: string[]
+  roles: Role[]
 };
 
 function authReducer(state : AuthState = { signedIn: false, roles: [] }, action : Action) : AuthState {
