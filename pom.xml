@@ -98,34 +98,32 @@
 			<plugin>
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>
-				<version>0.0.26</version>
+				<version>1.2</version>
 
 				<configuration>
 					<installDirectory>.mvn</installDirectory>
+					<nodeVersion>v7.2.0</nodeVersion>
+					<yarnVersion>v0.18.0</yarnVersion>
 				</configuration>
 
 				<executions>
 					<execution>
-						<id>Install Node and npm</id>
+						<id>Install Node and yarn</id>
 						<goals>
-							<goal>install-node-and-npm</goal>
+							<goal>install-node-and-yarn</goal>
 						</goals>
-						<configuration>
-							<nodeVersion>v5.2.0</nodeVersion>
-							<npmVersion>1.4.9</npmVersion>
-						</configuration>
 					</execution>
 					<execution>
-						<id>npm install</id>
+						<id>yarn install</id>
 						<goals>
-							<goal>npm</goal>
+							<goal>yarn</goal>
 						</goals>
 					</execution>
 					<execution>
 						<id>Run webpack</id>
 						<phase>generate-resources</phase>
 						<goals>
-							<goal>npm</goal>
+							<goal>yarn</goal>
 						</goals>
 						<configuration>
 							<arguments>run build</arguments>
