@@ -18,27 +18,26 @@ public class ViewConfig {
 	 * These are scripts needed to render a React application.
 	 * <ul>
 	 *     <li><code>polyfill.js</code> - implements some standard functions from a browser / NodeJS environment</li>
-	 *     <li><code>ejs.min.js</code> - EJS, a small JavaScript rendering library. This is copied from another
-	 *     demo project, and I don't know the original provenance.</li>
-	 *     <li><code>render.js</code> - code that invokes EJS with the correct values</li>
+	 *     <li><code>render.js</code> - code that renders the page with the correct values</li>
 	 *     <li><code>bundle.js</code> - all our application code, bundled up by Webpack</li>
 	 * </ul>
 	 */
     private static final String[] scripts = {
         "static/js/polyfill.js",
-        "static/js/ejs.min.js",
         "static/js/render.js",
         "static/app/bundle.js"
     };
 
 	/**
-	 * Configures where to find the views that we can render. We actually only have one, "index.ejs".
+	 * Configures where to find the views that we can render. Since we
+	 * actually do all the rendering in 'render.js', we only have a single
+	 * placeholder file.
 	 */
     @Bean
     public ViewResolver reactViewResolver() {
         ScriptTemplateViewResolver viewResolver = new ScriptTemplateViewResolver();
         viewResolver.setPrefix("templates/");
-        viewResolver.setSuffix(".ejs");
+        viewResolver.setSuffix(".txt");
         return viewResolver;
     }
 

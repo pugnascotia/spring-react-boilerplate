@@ -32,7 +32,7 @@ if (typeof window !== 'undefined') {
 }
 
 /**
- * Performs server-side rendering. The function is exported because the template engine (EJS)
+ * Performs server-side rendering. The function is exported because the templating function
  * that Spring will call uses this function to perform the meat of the rendering.
  * @param path the path to the resource requested by the client
  * @param state the Redux state supplied by Spring and massaged by the template engine
