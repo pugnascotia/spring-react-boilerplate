@@ -5,6 +5,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { renderToString } from 'react-dom/server';
+import Helmet from 'react-helmet';
 
 /* State management with redux */
 import { Provider } from 'react-redux';
@@ -34,6 +35,7 @@ if (typeof window !== 'undefined') {
 /**
  * Performs server-side rendering. The function is exported because the templating function
  * that Spring will call uses this function to perform the meat of the rendering.
+ *
  * @param path the path to the resource requested by the client
  * @param state the Redux state supplied by Spring and massaged by the template engine
  * @returns string the rendered page
@@ -71,5 +73,8 @@ export function renderApp(path : string, state : Object) {
     markup = doRender();
   }
 
-  return markup;
+  // Free accumulated object to avoid memory leak and return data to parent renderer
+  const head = Helmet.rewind();
+
+  return { markup, head };
 }

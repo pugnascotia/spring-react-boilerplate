@@ -5,6 +5,7 @@ src/main/js
 <PROJECT_ROOT>/.mvn/node/.*
 <PROJECT_ROOT>/node_modules/fbjs/.*
 <PROJECT_ROOT>/node_modules/json5/.*
+<PROJECT_ROOT>/node_modules/react-side-effect/.*
 
 [options]
 module.name_mapper.extension='less' -> '<PROJECT_ROOT>/src/main/flow/StyleStub.js'

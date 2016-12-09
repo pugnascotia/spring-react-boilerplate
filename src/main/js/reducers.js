@@ -5,7 +5,7 @@ import { ADD_COMMENT, COMMENTS_REFRESHED, AUTHENTICATED, LOGGED_OUT } from './ac
 import type { Action, Comment, Role } from './types';
 
 type CommentsState = {
-  status: string,
+  status: 'stale' | 'loaded',
   data: Comment[]
 }
 

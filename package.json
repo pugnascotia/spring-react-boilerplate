@@ -7,7 +7,7 @@
     "build": "flow && NODE_ENV=production webpack",
     "debug": "flow && NODE_ENV=debug webpack",
     "flow": "flow",
-    "lint": "eslint . --ext .js --ext .jsx || true",
+    "lint": "eslint --cache . --ext .js --ext .jsx",
     "start": "webpack-dev-server --hot --inline"
   },
   "repository": {
@@ -37,6 +37,7 @@
     "less-loader": "^2.2.3",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
+    "react-helmet": "^3.2.3",
     "react-redux": "^4.4.4",
     "react-router": "^4.0.0-alpha.4",
     "react-router-redux": "^4.0.6",
@@ -51,8 +52,8 @@
   "private": true,
   "devDependencies": {
     "eslint": "^3.11.1",
-    "eslint-loader": "^1.5.0",
     "eslint-config-airbnb": "^13.0.0",
+    "eslint-loader": "^1.5.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.8.0"

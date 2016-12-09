@@ -1,17 +1,14 @@
 /* @flow */
-
 import React from 'react';
 import { Match, Miss } from 'react-router';
+import AppMeta from './AppMeta';
 
 import MatchWhenAuthorized from './MatchWhenAuthorized';
-import AddComment from '../components/AddComment';
-import CommentList from '../components/CommentList';
-import Errors from '../components/Errors';
-import Navigation from '../components/Navigation';
-import SignIn from '../components/SignIn';
+import { AddComment, CommentList, Errors, Navigation, SignIn } from '../components';
 
 const App = () => (
   <div>
+    <AppMeta />
     <Navigation />
 
     <div className="container">
