@@ -60,7 +60,8 @@ const config = {
 if (TARGET === 'build' || TARGET === 'debug') {
   config.plugins.push(new ExtractTextPlugin('bundle.css', { allChunks: true }));
 
-  const styleLoader = config.module.loaders.find(function(each) {
+  // eslint-disable-next-line func-names,prefer-arrow-callback
+  const styleLoader = config.module.loaders.find(function (each) {
     return each.loader === 'style-loader!css-loader!less-loader';
   });
   styleLoader.loader = ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader');

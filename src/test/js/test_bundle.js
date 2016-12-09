@@ -1,4 +1,5 @@
 #!/usr/bin/env jjs
+/* eslint-disable */
 
 var ROOT = './src/main/resources/static';
 

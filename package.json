@@ -21,23 +21,17 @@
   },
   "homepage": "https://github.com/pugnascotia/spring-react-boilerplate#readme",
   "dependencies": {
-    "axios": "^0.14.0",
+    "axios": "^0.15.3",
     "babel-core": "^6.14.0",
-    "babel-eslint": "^6.1.2",
+    "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.5",
     "babel-plugin-react-transform": "^2.0.2",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
-    "css-loader": "^0.25.0",
-    "eslint": "^3.6.0",
-    "eslint-config-airbnb": "^12.0.0",
-    "eslint-loader": "^1.5.0",
-    "eslint-plugin-import": "^1.16.0",
-    "eslint-plugin-jsx-a11y": "^2.2.2",
-    "eslint-plugin-react": "^6.3.0",
+    "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "^1.0.1",
-    "flow-bin": "^0.32.0",
+    "flow-bin": "^0.36.0",
     "history": "^4.2.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
@@ -54,5 +48,13 @@
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.1"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "eslint": "^3.11.1",
+    "eslint-loader": "^1.5.0",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0"
+  }
 }

@@ -9,6 +9,7 @@ Yes, but with Java. It's inspired by the
 [spring-react-isomorphic](https://github.com/sdeleuze/spring-react-isomorphic)
 project, but uses:
 
+- [Yarn](https://yarnpkg.com/) for installing Node modules.
 - [Webpack](https://github.com/webpack/webpack) to bundle all the
   JavaScript and dependencies, plus LESS + CSS handling.
 - [Babel](https://babeljs.io/) for ES6 syntax, using Babel 6 with the "es2016" and "react" presets.
