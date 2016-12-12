@@ -72,3 +72,9 @@ expects a DOM - and that includes the Webpack style loader. This is the root of
 most problems. You should note that server-side rendering *does not* require a
 DOM - which is why `src/main/resources/static/js/polyfill.js` doesn't provide
 any `window` or `document` stubs.
+
+## The `render` function
+
+We implement a customer render function for Spring to call. The source code
+is in `render.es6.js`, and is compiled to ES5 syntax during the Maven
+build.

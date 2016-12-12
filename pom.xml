@@ -129,6 +129,16 @@
 							<arguments>run build</arguments>
 						</configuration>
 					</execution>
+					<execution>
+						<id>Compile renderer</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>yarn</goal>
+						</goals>
+						<configuration>
+							<arguments>run compile-renderer</arguments>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 

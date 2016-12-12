@@ -3,6 +3,7 @@ target/
 .mvn/node
 node_modules/
 src/main/resources/static/app/
+src/main/resources/static/js/render.js
 
 ### STS ###
 .apt_generated

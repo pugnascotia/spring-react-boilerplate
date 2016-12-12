@@ -1,5 +1,6 @@
 #!/usr/bin/env jjs
-/* eslint-disable */
+/* eslint-env nashorn */
+/* eslint-disable no-var, prefer-template */
 
 var ROOT = './src/main/resources/static';
 

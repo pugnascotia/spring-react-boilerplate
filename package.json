@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "flow && NODE_ENV=production webpack",
+    "compile-renderer": "babel src/main/resources/static/js/render.es6.js -o src/main/resources/static/js/render.js",
     "debug": "flow && NODE_ENV=debug webpack",
     "flow": "flow",
     "lint": "eslint --cache . --ext .js --ext .jsx",
@@ -22,6 +23,7 @@
   "homepage": "https://github.com/pugnascotia/spring-react-boilerplate#readme",
   "dependencies": {
     "axios": "^0.15.3",
+    "babel-cli": "^6.18.0",
     "babel-core": "^6.14.0",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.5",
