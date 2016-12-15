@@ -7,10 +7,13 @@ const TARGET = process.env.npm_lifecycle_event;
 const SRC = path.resolve(__dirname, 'src/main/js');
 const DEST = path.resolve(__dirname, 'src/main/resources/static/app');
 
+const sourcePath = path.resolve(__dirname, 'src/main/js');
+
 const config = {
-  entry: SRC,
+  entry: './index',
+  context: SRC,
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['.js', '.jsx', '.less']
   },
   output: {
     path: DEST,
@@ -19,26 +22,37 @@ const config = {
     library: 'ReactDemo'
   },
   module: {
-    preLoaders: [
+    rules: [
       {
         test: /\.jsx?$/,
-        loaders: ['eslint'],
-        include: SRC
-      }
-    ],
-    loaders: [
+        use: [ 'eslint-loader' ],
+        enforce: 'pre'
+      },
       {
         test: /\.jsx?$/,
-        loaders: ['babel'],
-        include: SRC
+        use: [ 'babel-loader' ],
+        exclude: /node_modules/
       },
       {
         test: /\.(?:css|less)$/,
-        loader: 'style-loader!css-loader!less-loader'
+        loader: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: 'css-loader!less-loader'
+        })
       }
     ]
   },
-  plugins: [],
+  plugins: [
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    }),
+    new ExtractTextPlugin({
+      filename: 'bundle.css',
+      allChunks: true,
+      disabled: TARGET === 'build' || TARGET === 'debug'
+    })
+  ],
   devServer: {
     port: 9090,
     proxy: {
@@ -51,25 +65,10 @@ const config = {
     },
     publicPath: 'http://localhost:9090/app/'
   },
-  devtool: 'source-map'
+  devtool: TARGET === 'build' ? 'source-map' : 'eval'
 };
 
-/* Build bundle.css only if we're doing a prod build. This is because the plugin we
- * use breaks hot-reloading.
- */
-if (TARGET === 'build' || TARGET === 'debug') {
-  config.plugins.push(new ExtractTextPlugin('bundle.css', { allChunks: true }));
-
-  // eslint-disable-next-line func-names,prefer-arrow-callback
-  const styleLoader = config.module.loaders.find(function (each) {
-    return each.loader === 'style-loader!css-loader!less-loader';
-  });
-  styleLoader.loader = ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader');
-}
-
 if (TARGET === 'build') {
-  config.devtool = 'source-map';
-
   config.plugins.push(
     new webpack.DefinePlugin({
       'process.env': {
@@ -79,7 +78,8 @@ if (TARGET === 'build') {
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
-      }
+      },
+      sourceMap: true
     })
   );
 }
