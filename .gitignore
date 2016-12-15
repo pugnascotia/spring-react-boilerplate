@@ -33,3 +33,5 @@ nbdist/
 
 ### ESLint ###
 .eslintcache
+
+.DS_Store
