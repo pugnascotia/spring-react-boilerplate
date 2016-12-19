@@ -1,0 +1,36 @@
+{
+  "name": "spring-react-boilerplate",
+  "version": "1.0.0",
+  "description": "Spring + React + Redux + React Router isomorphic templating application",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "0.8.4"
+  },
+  "dependencies": {
+    "axios": "^0.15.3",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-helmet": "^3.2.3",
+    "react-redux": "^4.4.4",
+    "react-router": "^4.0.0-alpha.4",
+    "react-router-redux": "^4.0.6",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "compile-renderer": "babel src/main/resources/static/js/render.es6.js -o src/main/resources/static/js/render.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pugnascotia/spring-react-boilerplate.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pugnascotia/spring-react-boilerplate/issues"
+  },
+  "homepage": "https://github.com/pugnascotia/spring-react-boilerplate#readme"
+}
