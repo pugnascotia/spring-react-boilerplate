@@ -1,5 +1,9 @@
 # spring-react-boilerplate
 
+*NOTE:* `create-react-app` support is a WIP! To work it needs to changes to
+CRA that are not neither merged nor released. This branch will not work for
+you if you try to use it.
+
 An example application that uses a Spring Java backend with a React
 frontend.
 

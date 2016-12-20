@@ -137,7 +137,6 @@
 
 					<execution>
 						<id>Frontend build</id>
-						<phase>package</phase>
 						<goals>
 							<goal>yarn</goal>
 						</goals>
@@ -149,7 +148,6 @@
 
 					<execution>
 						<id>Compile renderer</id>
-						<phase>package</phase>
 						<goals>
 							<goal>yarn</goal>
 						</goals>
@@ -167,7 +165,7 @@
 				<executions>
 					<execution>
 						<id>Copy frontend production build to resources</id>
-						<phase>package</phase>
+						<phase>generate-resources</phase>
 						<goals>
 							<goal>copy-resources</goal>
 						</goals>
@@ -184,7 +182,7 @@
 
 					<execution>
 						<id>Copy renderer build to resources</id>
-						<phase>package</phase>
+						<phase>generate-resources</phase>
 						<goals>
 							<goal>copy-resources</goal>
 						</goals>

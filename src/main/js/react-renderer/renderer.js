@@ -1,3 +1,4 @@
+/* global springReactBoilerplate, Packages */
 const render = (function () {
 
   const serializer = (new Packages.com.fasterxml.jackson.databind.ObjectMapper()).writer();
@@ -72,7 +73,7 @@ const render = (function () {
   return function(template, model) {
     const { requestPath, data, json } = getData(model);
 
-    const { markup, head } = ReactDemo.renderApp(requestPath, data);
+    const { markup, head } = springReactBoilerplate.renderApp(requestPath, data);
 
     return populateTemplate(markup, head, json);
   };

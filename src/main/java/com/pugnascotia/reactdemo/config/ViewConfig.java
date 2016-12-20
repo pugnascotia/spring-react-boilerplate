@@ -1,9 +1,18 @@
 package com.pugnascotia.reactdemo.config;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import javax.inject.Inject;
 import javax.script.ScriptEngine;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.script.ScriptTemplateConfigurer;
 import org.springframework.web.servlet.view.script.ScriptTemplateViewResolver;
@@ -14,19 +23,11 @@ import org.springframework.web.servlet.view.script.ScriptTemplateViewResolver;
 @Configuration
 public class ViewConfig {
 
-	/**
-	 * These are scripts needed to render a React application.
-	 * <ul>
-	 *     <li><code>polyfill.js</code> - implements some standard functions from a browser / NodeJS environment</li>
-	 *     <li><code>render.js</code> - code that renders the page with the correct values</li>
-	 *     <li><code>bundle.js</code> - all our application code, bundled up by Webpack</li>
-	 * </ul>
-	 */
-    private static final String[] scripts = {
-        "static/js/polyfill.js",
-        "static/js/render.js",
-        "static/app/bundle.js"
-    };
+	@Inject
+	private ResourceLoader resourceLoader;
+
+	@Inject
+	private ObjectMapper mapper;
 
 	/**
 	 * Configures where to find the views that we can render. Since we
@@ -50,7 +51,7 @@ public class ViewConfig {
         configurer.setEngineName("nashorn");
 
 		/* Initialise the ScriptEngine with these scripts. */
-        configurer.setScripts(scripts);
+        configurer.setScripts(getScripts());
 
 		/* The ScriptEngine will call this function to perform the render */
         configurer.setRenderFunction("render");
@@ -59,5 +60,31 @@ public class ViewConfig {
         configurer.setSharedEngine(false);
 
         return configurer;
-    }
+	}
+
+	/**
+	 * These are the scripts needed to render our React application.
+	 * <ul>p
+	 *   <li><code>polyfill.js</code> - implements some standard functions from a browser / NodeJS environment</li>
+	 *   <li><code>renderer.js</code> - code that renders the page with the correct values</li>
+	 *   <li><code>main.[hash].js</code> - all our application code, bundled up by Webpack, with a hashcode in the name</li>
+	 * </ul>
+	 */
+	private String[] getScripts() {
+		return new String[] {
+			"js/polyfill.js",
+			"js/renderer.js",
+			getBundleName()
+		};
+	}
+
+	@SneakyThrows(IOException.class)
+	private String getBundleName() {
+		Resource manifestResource = resourceLoader.getResource("classpath:static/asset-manifest.json");
+
+		TypeReference<HashMap<String,String>> typeRef = new TypeReference<HashMap<String,String>>() {};
+		Map<String, String> manifest = mapper.readValue(manifestResource.getFile(), typeRef);
+
+		return "static/" + manifest.get("main.js");
+	}
 }
