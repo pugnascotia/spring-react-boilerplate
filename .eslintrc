@@ -9,6 +9,7 @@
     "arrow-parens": 0,
     "brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
     "comma-dangle": [2, "never"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "max-len": ["error", 120],
     "no-console": 0,
     "no-plusplus": 0,
