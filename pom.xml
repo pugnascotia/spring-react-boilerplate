@@ -102,8 +102,8 @@
 
 				<configuration>
 					<installDirectory>.mvn</installDirectory>
-					<nodeVersion>v7.2.0</nodeVersion>
-					<yarnVersion>v0.18.0</yarnVersion>
+					<nodeVersion>v8.4.0</nodeVersion>
+					<yarnVersion>v0.27.5</yarnVersion>
 				</configuration>
 
 				<executions>
