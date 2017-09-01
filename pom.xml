@@ -72,7 +72,6 @@
 				</configuration>
 			</plugin>
 
-			<!--
 			<plugin>
 				<artifactId>exec-maven-plugin</artifactId>
 				<groupId>org.codehaus.mojo</groupId>
@@ -82,7 +81,6 @@
 						-->
 						<!-- Ensure that Nashorn can load the bundle without errors. 'test' would arguably be a -->
 						<!-- more appropriate phase, but that doesn't get run with the default target. -->
-						<!--
 						<phase>test-compile</phase>
 						<goals>
 							<goal>exec</goal>
@@ -94,7 +92,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			-->
 
 			<plugin>
 				<groupId>com.github.eirslett</groupId>
