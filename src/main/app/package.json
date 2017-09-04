@@ -30,6 +30,8 @@
     "fs-extra": "3.0.1",
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.5",
     "lodash.camelcase": "^4.3.0",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
@@ -57,6 +59,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
+    "flow": "flow",
     "compile-renderer": "babel src/main/resources/static/js/render.es6.js -o src/main/resources/static/js/render.js"
   },
   "repository": {
