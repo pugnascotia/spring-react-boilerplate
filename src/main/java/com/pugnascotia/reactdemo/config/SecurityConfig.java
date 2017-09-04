@@ -46,9 +46,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers(
-			"/app/**",
-			"/js/**",
-			"/favicon.ico"
+			"/asset-manifest.json",
+			"/favicon.ico",
+			"/index.html",
+			"/service-worker.js",
+			"/static/**"
 		);
 	}
 

@@ -33,8 +33,7 @@ const AppMeta = () => (
         href: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css',
         integrity: 'sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r',
         crossorigin: 'anonymous'
-      },
-      { rel: 'stylesheet', href: '/app/bundle.css' }
+      }
     ]}
   />
 );

@@ -72,7 +72,6 @@ public class ViewConfig {
 	 */
 	private String[] getScripts() {
 		return new String[] {
-			"js/polyfill.js",
 			"js/renderer.js",
 			getBundleName()
 		};

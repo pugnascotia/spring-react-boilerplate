@@ -138,7 +138,7 @@
 							<goal>yarn</goal>
 						</goals>
 						<configuration>
-							<arguments>run build</arguments>
+							<arguments>build</arguments>
 							<workingDirectory>src/main/app</workingDirectory>
 						</configuration>
 					</execution>
@@ -149,7 +149,7 @@
 							<goal>yarn</goal>
 						</goals>
 						<configuration>
-							<arguments>run build</arguments>
+							<arguments>build</arguments>
 							<workingDirectory>src/main/js/react-renderer</workingDirectory>
 						</configuration>
 					</execution>

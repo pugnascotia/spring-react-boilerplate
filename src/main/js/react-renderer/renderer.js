@@ -1,5 +1,12 @@
 /* global springReactBoilerplate, Packages */
 const render = (function () {
+  let bundlePath = "static/js/main.js";
+  let cssPath = "static/css/main.css";
+
+  if (assetManifest) {
+    bundlePath = assetManifest['main.js'];
+    cssPath = assetManifest['main.css'];
+  }
 
   const serializer = (new Packages.com.fasterxml.jackson.databind.ObjectMapper()).writer();
 
@@ -53,19 +60,20 @@ const render = (function () {
     return `<!doctype html>
 <html ${head.htmlAttributes.toString()}>
   <head>
+    <link rel="stylesheet" href="/${ cssPath }" />
     ${ head.base.toString() }
     ${ head.link.toString() }
     ${ head.meta.toString() }
     ${ head.title.toString() }
   </head>
   <body>
-    <div id="mount">${markup}</div>
+    <div id="root">${markup}</div>
     <script type="text/javascript">window.__INITIAL_STATE__ = ${safeJson}</script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js">
     </script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
      integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-   <script type="text/javascript" src="/app/bundle.js"></script>
+   <script type="text/javascript" src="/${ bundlePath }"></script>
  </body>
 </html>`;
   }

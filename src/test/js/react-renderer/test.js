@@ -7,8 +7,8 @@ var renderer = './src/main/js/react-renderer/build/renderer.js';
 var appRoot = './src/main/app/build'
 
 try {
-  print('Loading polyfill...');
-  load(polyfill);
+  print('Loading renderer...');
+  load(renderer);
 
   print('Loading manifest to locate bundle...');
   var manifest = JSON.parse(readFully(appRoot + '/asset-manifest.json'));
@@ -16,9 +16,6 @@ try {
 
   print('Loading bundle ' + bundle + ' ...');
   load(bundle);
-
-  print('Loading renderer...');
-  load(renderer);
 
   var markup = render(null, { '__requestPath': '/' });
 
