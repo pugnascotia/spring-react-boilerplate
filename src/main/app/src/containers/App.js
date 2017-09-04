@@ -1,9 +1,9 @@
 /* @flow */
 import React from 'react';
-import { Match, Miss } from 'react-router';
+import { Route, Switch } from 'react-router';
 import AppMeta from './AppMeta';
 
-import MatchWhenAuthorized from './MatchWhenAuthorized';
+import PrivateRoute from './PrivateRoute';
 import { AddComment, CommentList, Errors, Navigation, SignIn } from '../components';
 
 const App = () => (
@@ -12,10 +12,12 @@ const App = () => (
     <Navigation />
 
     <div className="container">
-      <Match exactly pattern="/" component={CommentList} />
-      <MatchWhenAuthorized pattern="/add" component={AddComment} />
-      <Match pattern="/signin" component={SignIn} />
-      <Miss component={Errors} />
+      <Switch>
+        <Route exact path="/" component={CommentList} />
+        <PrivateRoute path="/add" component={AddComment} />
+        <Route path="/signin" component={SignIn} />
+        <Route component={Errors} />
+      </Switch>
     </div>
   </div>
 );

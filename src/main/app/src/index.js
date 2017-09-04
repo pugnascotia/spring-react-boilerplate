@@ -1,7 +1,6 @@
 /* @flow */
 /* React, browser and server rendering functions. We need the
- * first import, even though it isn't explicitly referenced
- * in this file, in order to avoid runtime errors. */
+ * first import as JSX compiled to React.createComponent(...) */
 import React from 'react';
 import { render } from 'react-dom';
 import { renderToString } from 'react-dom/server';
@@ -11,7 +10,8 @@ import Helmet from 'react-helmet';
 import { Provider } from 'react-redux';
 
 /* Routing with react-router */
-import { BrowserRouter, ServerRouter, createServerRenderContext } from 'react-router';
+import { StaticRouter } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 
 import App from './containers/App';
 
@@ -29,7 +29,7 @@ if (typeof window !== 'undefined') {
     </Provider>
   );
 
-  render(app, document.getElementById('mount'));
+  render(app, document.getElementById('root'));
 }
 
 /**
@@ -44,34 +44,17 @@ if (typeof window !== 'undefined') {
 export function renderApp(path : string, state : Object) {
   const store = createStore(state);
 
-  // first create a context for <ServerRouter>, it's where we keep the
-  // results of rendering for the second pass if necessary
-  const context = createServerRenderContext();
-
-  function doRender() {
-    return renderToString(
-      <Provider store={store}>
-        <ServerRouter
-          location={path}
-          context={context}
-        >
-          <App />
-        </ServerRouter>
-      </Provider>
-    );
-  }
-
-  let markup = doRender();
-
-  const result = context.getResult();
-
-  // We ignore result.redirect because Spring should have handled that
-  // for us. If we got a miss, then perform a second render pass with
-  // the context to clue the <Miss> components into rendering
-  // this time (on the client they know from componentDidMount)
-  if (result.missed) {
-    markup = doRender();
-  }
+  // 404's will be handled by correct route definitions. Redirects will be handled by Spring.
+  const markup = renderToString(
+    <Provider store={ store }>
+      <StaticRouter
+        location={ path }
+        context={ {} }
+      >
+        <App/>
+      </StaticRouter>
+    </Provider>
+  )
 
   // Free accumulated object to avoid memory leak and return data to parent renderer
   const head = Helmet.rewind();

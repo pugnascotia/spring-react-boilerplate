@@ -78,7 +78,6 @@
 				<executions>
 					<execution>
 						<id>Test bundle with Nashorn</id>
-						-->
 						<!-- Ensure that Nashorn can load the bundle without errors. 'test' would arguably be a -->
 						<!-- more appropriate phase, but that doesn't get run with the default target. -->
 						<phase>test-compile</phase>
@@ -87,7 +86,8 @@
 						</goals>
 						<configuration>
 							<executable>jjs</executable>
-							<commandlineArgs>${project.basedir}/src/test/js/test_bundle.js</commandlineArgs>
+							<!-- Pull in the Maven claspath to get the Jackson jars -->
+							<commandlineArgs>-cp %classpath -scripting ${project.basedir}/src/test/js/react-renderer/test.js</commandlineArgs>
 						</configuration>
 					</execution>
 				</executions>
@@ -167,7 +167,7 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${basedir}/target/classes/static</outputDirectory>
+							<outputDirectory>${basedir}/target/classes/public</outputDirectory>
 							<resources>
 								<resource>
 									<directory>src/main/app/build/</directory>
@@ -184,7 +184,7 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${basedir}/target/classes</outputDirectory>
+							<outputDirectory>${basedir}/target/classes/js</outputDirectory>
 							<resources>
 								<resource>
 									<directory>src/main/js/react-renderer/build</directory>

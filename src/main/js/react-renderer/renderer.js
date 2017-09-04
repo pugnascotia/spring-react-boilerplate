@@ -70,7 +70,9 @@ const render = (function () {
 </html>`;
   }
 
-  return function(template, model) {
+  // Spring calls the function with the view name and data, but we don't
+  // use the former
+  return function(_viewName, model) {
     const { requestPath, data, json } = getData(model);
 
     const { markup, head } = springReactBoilerplate.renderApp(requestPath, data);

@@ -1,36 +1,28 @@
 /* @flow */
-/* eslint jsx-a11y/href-no-hash:"off" */
-/* I discourage you from leaving the above disabled - I've only done this as this is a demo app. */
-
 import React from 'react';
-import { Link } from 'react-router';
-import { routerContext as RouterType } from 'react-router/PropTypes';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
 import { loggedOut } from '../actions';
 
-import type { Auth, Router } from '../types';
+import type { Auth } from '../types';
 
 type Props = {
   auth: Auth,
-  onSignOut: Function
+  onSignOut: Function,
+  history: {
+    push: (path: string) => void
+  }
 };
 
-type Context = {
-  router: Router
-}
-
-class Navigation extends React.Component {
-  props: Props;
-  context: Context;
-
+class Navigation extends React.Component<Props> {
   handleSignOut() {
     axios.post('/api/signout')
       .then(
         (/* success*/) => {
           this.props.onSignOut();
-          this.context.router.transitionTo('/');
+          this.props.history.push('/');
         },
         failure => console.error(`Failed to log out successfully: ${failure}`)
       );
@@ -104,12 +96,10 @@ class Navigation extends React.Component {
   }
 }
 
-Navigation.contextTypes = {
-  router: RouterType.isRequired
-};
-
 /* Inject auth state and a dispatch() wrapper into props */
-export default connect(
-  state => ({ auth: state.auth }),
-  dispatch => ({ onSignOut: () => dispatch(loggedOut()) })
-)(Navigation);
+export default withRouter(
+  connect(
+    state => ({ auth: state.auth }),
+    dispatch => ({ onSignOut: () => dispatch(loggedOut()) })
+  )(Navigation)
+);

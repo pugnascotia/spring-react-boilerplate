@@ -80,11 +80,11 @@ public class ViewConfig {
 
 	@SneakyThrows(IOException.class)
 	private String getBundleName() {
-		Resource manifestResource = resourceLoader.getResource("classpath:static/asset-manifest.json");
+		Resource manifestResource = resourceLoader.getResource("classpath:public/asset-manifest.json");
 
 		TypeReference<HashMap<String,String>> typeRef = new TypeReference<HashMap<String,String>>() {};
 		Map<String, String> manifest = mapper.readValue(manifestResource.getFile(), typeRef);
 
-		return "static/" + manifest.get("main.js");
+		return "public/" + manifest.get("main.js");
 	}
 }

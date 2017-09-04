@@ -1,19 +1,20 @@
 // @flow
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { routerContext as RouterType } from 'react-router/PropTypes';
 
 import { saveComment } from '../actions';
 
-import type { Router } from '../types';
+type Props = {
+  dispatch: Function,
+  history: {
+    push: (path: string) => void
+  }
+};
 
-class AddComment extends React.Component {
-  props: { dispatch: Function };
-  context: { router: Router };
-
-  authorInput : HTMLInputElement;
-  contextInput: HTMLInputElement;
+class AddComment extends React.Component<Props> {
+  authorInput : ?HTMLInputElement;
+  contextInput: ?HTMLInputElement;
 
   addComment(author : string, content : string) : void {
     this.props.dispatch(saveComment(author, content));
@@ -25,12 +26,13 @@ class AddComment extends React.Component {
     const author = this.authorInput;
     const content = this.contextInput;
 
-    this.addComment(author.value.trim(), content.value.trim());
+    if (author && content) {
+      this.addComment(author.value.trim(), content.value.trim());
+      author.value = '';
+      content.value = '';
+    }
 
-    author.value = '';
-    content.value = '';
-
-    this.context.router.transitionTo('/');
+    this.props.history.push('/');
   }
 
   render() {
@@ -52,9 +54,5 @@ class AddComment extends React.Component {
   }
 }
 
-AddComment.contextTypes = {
-  router: RouterType.isRequired
-};
-
 /* Inject dispatch() but no state into props */
-export default connect()(AddComment);
+export default withRouter(connect()(AddComment));

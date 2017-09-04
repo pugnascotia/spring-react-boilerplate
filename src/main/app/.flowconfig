@@ -1,0 +1,10 @@
+[ignore]
+
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+module.name_mapper.extension='less' -> '<PROJECT_ROOT>/src/StyleStub.js'

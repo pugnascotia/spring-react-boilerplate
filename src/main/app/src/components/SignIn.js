@@ -1,36 +1,37 @@
 /* @flow */
 import React from 'react';
 import { connect } from 'react-redux';
-import { routerContext as RouterType } from 'react-router/PropTypes';
+import { withRouter } from 'react-router-dom';
 
 import axios from 'axios';
 
 import { authenticated } from '../actions';
 
-import type { Router } from '../types';
+type Props = {
+  dispatch: Function,
+  location: Object,
+  history: {
+    push: (path: string) => void
+  }
+};
 
 type State = {
   authFailed: boolean
 };
 
-class SignIn extends React.Component {
-  context: { router: Router };
-  props: { dispatch: Function, location: Object };
-  state: State;
-
-  usernameInput : HTMLInputElement;
-  passwordInput: HTMLInputElement;
-
-  constructor(props) {
-    super(props);
-    this.state = { authFailed: false };
+class SignIn extends React.Component<Props, State> {
+  state = {
+    authFailed: false
   }
+
+  usernameInput: ?HTMLInputElement;
+  passwordInput: ?HTMLInputElement;
 
   handleOnSignIn(event) {
     event.preventDefault();
 
-    const username = this.usernameInput.value.trim();
-    const password = this.passwordInput.value.trim();
+    const username = this.usernameInput ? this.usernameInput.value.trim() : '';
+    const password = this.passwordInput ? this.passwordInput.value.trim() : '';
 
     if (username.length === 0) {
       return;
@@ -46,7 +47,7 @@ class SignIn extends React.Component {
           const { location } = this.props;
           const nextPathname = location.state && location.state.nextPathname ? location.state.nextPathname : '/';
 
-          this.context.router.transitionTo(nextPathname);
+          this.props.history.push(nextPathname);
         },
         failure => {
           console.error(failure);
@@ -95,9 +96,5 @@ class SignIn extends React.Component {
   }
 }
 
-SignIn.contextTypes = {
-  router: RouterType.isRequired
-};
-
 /* Inject auth state and dispatch() into props */
-export default connect(state => ({ auth: state.auth }))(SignIn);
+export default withRouter(connect(state => ({ auth: state.auth }))(SignIn));

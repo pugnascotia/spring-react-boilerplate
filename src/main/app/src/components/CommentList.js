@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Comment from './Comment';
@@ -20,9 +20,7 @@ type Props = {
   dispatch: Dispatch
 };
 
-class CommentList extends React.Component {
-  props: Props;
-
+class CommentList extends React.Component<Props> {
   componentDidMount() {
     if (this.props.status === 'stale') {
       this.props.dispatch(refreshComments());
