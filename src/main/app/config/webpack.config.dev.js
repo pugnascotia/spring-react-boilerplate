@@ -189,10 +189,7 @@ module.exports = {
                 },
               },
               {
-                loader: require.resolve('less-loader'),
-                options: {
-                  sourceMap: shouldUseSourceMap,
-                },
+                loader: require.resolve('less-loader')
               }
             ],
           },
