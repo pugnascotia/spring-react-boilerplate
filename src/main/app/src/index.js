@@ -2,9 +2,12 @@
 /* React, browser and server rendering functions. We need the
  * first import as JSX compiled to React.createComponent(...) */
 import React from 'react';
-import { render } from 'react-dom';
+import { render as renderToDom } from 'react-dom';
 import { renderToString } from 'react-dom/server';
 import Helmet from 'react-helmet';
+
+/* Hot-module reloading */
+import { AppContainer } from 'react-hot-loader'
 
 /* State management with redux */
 import { Provider } from 'react-redux';
@@ -19,17 +22,29 @@ import createStore from './store';
 
 /* Client-side rendering. We rehydrate the Redux store and plugin it into the page render.*/
 if (typeof window !== 'undefined') {
+  // Only create the store once!
   const store = createStore(window.__INITIAL_STATE__);
 
-  const app = (
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
-  );
+  const render = Component => {
+    const app = (
+      <AppContainer>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Component />
+          </BrowserRouter>
+        </Provider>
+      </AppContainer>
+    );
 
-  render(app, document.getElementById('root'));
+    renderToDom(app, document.getElementById('root'));
+  }
+
+  render(App);
+
+  // Register with Hot Module Replacement API
+  if (module.hot) {
+    module.hot.accept('./containers/App', () => { render(App) });
+  }
 }
 
 /**
