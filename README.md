@@ -1,32 +1,32 @@
 # spring-react-boilerplate
 
-*NOTE:* `create-react-app` support is a WIP! To work it needs to changes to
-CRA that are not neither merged nor released. This branch will not work for
-you if you try to use it.
-
 An example application that uses a Spring Java backend with a React
-frontend.
+frontend and can perform server-side rendering (SSR).
 
 ## Another Boilerplate?
 
 Yes, but with Java. It's inspired by the
 [spring-react-isomorphic](https://github.com/sdeleuze/spring-react-isomorphic)
-project, but uses:
+project, but at this point has been rebuilt from the ground up. The
+frontend is build on
+[create-react-app](https://github.com/facebookincubator/create-react-app)
+(CRA), though unforunately it was necessary to "eject" from CRA in order to
+apply some changes for server.
+
+The project also uses:
 
 - [Yarn](https://yarnpkg.com/) for installing Node modules.
 - [Webpack](https://github.com/webpack/webpack) to bundle all the
   JavaScript and dependencies, plus LESS + CSS handling.
-- [Babel](https://babeljs.io/) for ES6 syntax, using Babel 6 with the "es2016" and "react" presets.
+- [Babel](https://babeljs.io/) for transpiling the server-side render function.
 - [Hot module reloading
   (HMR)](https://github.com/gaearon/react-transform-hmr) of React components
 - [Redux](https://github.com/rackt/redux) to manage state, both in the
   client and when rendering on the server.
 - [react-router](https://github.com/rackt/react-router) for page routing,
-  on client and server. Note that this is version 4, with a very different (and
-  simpler) API to previous versions.
+  on client and server
 - [react-helmet](https://github.com/nfl/react-helmet) for managing
   meta-data in the HTML
-- Linting integrated with Webpack via [eslint](https://github.com/MoOx/eslint-loader).
 - Type checking with [Flow](https://flowtype.org/).
 
 ## Other Goodies
@@ -52,7 +52,10 @@ Execute `mvn` if you have Maven already installed, or `./mvnw` if you don't. You
 a minimum version of `1.8.0_65`. Older versions have a bug that makes rendering
 brutally slow.
 
-Run Webpack in hot-module reloading mode with: `npm start`.
+To run the frontend in hot-module reloading mode:
+
+    cd src/main/app
+    yarn start
 
 ## Conventions
 
@@ -63,7 +66,7 @@ suffixed with `Resource`, and handle requests under `/api`.
 
 In order to preempt runtime errors with Nashorn loading the bundle, a test
 script is executed by Maven during the `test-compile` phase, located at
-`src/test/js/test_bundle.js`. If this script fails, you can diagnose the problem
+`src/test/js/react-renderer/test.js`. If this script fails, you can diagnose the problem
 by:
 
 * Running a debug build with `npm run debug`. This runs Webpack in a production
@@ -74,11 +77,11 @@ by:
 It's easy to create a bundle that's broken on the server by including code that
 expects a DOM - and that includes the Webpack style loader. This is the root of
 most problems. You should note that server-side rendering *does not* require a
-DOM - which is why `src/main/resources/static/js/polyfill.js` doesn't provide
+DOM - which is why `src/main/js/react-renderer/polyfill.js` doesn't provide
 any `window` or `document` stubs.
 
 ## The `render` function
 
 We implement a customer render function for Spring to call. The source code
-is in `render.es6.js`, and is compiled to ES5 syntax during the Maven
+is in `src/main/js/react-render/render.js`, and is compiled to ES5 syntax during the Maven
 build.
