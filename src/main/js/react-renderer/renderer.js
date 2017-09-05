@@ -1,7 +1,8 @@
-/* global springReactBoilerplate, Packages */
+/* global springReactBoilerplate, assetManifest, Packages */
+// eslint-disable-next-line no-unused-vars
 const render = (function () {
-  let bundlePath = "static/js/main.js";
-  let cssPath = "static/css/main.css";
+  let bundlePath = 'static/js/main.js';
+  let cssPath = 'static/css/main.css';
 
   if (assetManifest) {
     bundlePath = assetManifest['main.js'];
@@ -13,7 +14,7 @@ const render = (function () {
   function getData(model) {
     const renderData = { data: {} };
     for (let key in model) {
-      if (key.startsWith("__")) {
+      if (key.startsWith('__')) {
         renderData[ key.substring(2) ] = model[key];
       }
       else {
@@ -38,7 +39,7 @@ const render = (function () {
   // Ensure dehydrated state is safe to read on the browser. Here I'm just pinching code from
   // the `serialize-javascript` npm module.
 
-  const UNSAFE_CHARS_REGEXP = /[<>\/\u2028\u2029]/g;
+  const UNSAFE_CHARS_REGEXP = /[<>/\u2028\u2029]/g;
 
   // Mapping of unsafe HTML and invalid JavaScript line terminator chars to their
   // Unicode char counterparts which are safe to use in JavaScript strings.

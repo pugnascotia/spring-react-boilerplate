@@ -64,9 +64,8 @@ public class ViewConfig {
 
 	/**
 	 * These are the scripts needed to render our React application.
-	 * <ul>p
-	 *   <li><code>polyfill.js</code> - implements some standard functions from a browser / NodeJS environment</li>
-	 *   <li><code>renderer.js</code> - code that renders the page with the correct values</li>
+	 * <ul>
+	 *   <li><code>renderer.js</code> - code that renders the response, along with polyfills for some standard functions from a browser / NodeJS environment, and the contents of asset-manifest.json.</li>
 	 *   <li><code>main.[hash].js</code> - all our application code, bundled up by Webpack, with a hashcode in the name</li>
 	 * </ul>
 	 */

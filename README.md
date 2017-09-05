@@ -10,8 +10,8 @@ Yes, but with Java. It's inspired by the
 project, but at this point has been rebuilt from the ground up. The
 frontend is build on
 [create-react-app](https://github.com/facebookincubator/create-react-app)
-(CRA), though unforunately it was necessary to "eject" from CRA in order to
-apply some changes for server.
+(CRA), though it was necessary to "eject" from CRA in order to apply some
+changes for server.
 
 The project also uses:
 
@@ -20,10 +20,10 @@ The project also uses:
   JavaScript and dependencies, plus LESS + CSS handling.
 - [Babel](https://babeljs.io/) for transpiling the server-side render function.
 - [Hot module reloading
-  (HMR)](https://github.com/gaearon/react-transform-hmr) of React components
-- [Redux](https://github.com/rackt/redux) to manage state, both in the
+  (HMR)](https://github.com/gaearon/react-hot-loader) of React components
+- [Redux](https://github.com/reactjs/redux) to manage state, both in the
   client and when rendering on the server.
-- [react-router](https://github.com/rackt/react-router) for page routing,
+- [react-router](https://github.com/ReactTraining/react-router) for page routing,
   on client and server
 - [react-helmet](https://github.com/nfl/react-helmet) for managing
   meta-data in the HTML
@@ -41,16 +41,33 @@ You also get:
   but summary is Nashorn won't (and actually can't) string-ify POJOs via
   `JSON.stringify`, meaning it can't be used to serialise the Redux state.
 
-## Caveats
+## Changes from create-react-app
 
-This isn't necessarily the best way to write a React application. Pull requests welcome!
+   * Webpack output is a UMD bundle, which makes it possible to load it in
+     Nashorn
+   * Hot reloading has been added
+   * LESS support has been added
+   * CRA's `polyfills.js` has been changed to be SSR-friendly
+
+## The `render` function
+
+We implement a custom render function for Spring to call. The source code
+is in `src/main/js/react-render/render.js`, and is compiled to ES5 syntax
+during the Maven build. Its build process also pulls in polyfills, to allow
+React etc to work, and the frontend's JSON manifest, in order to locate the
+frontend's built assets. See the `build.sh` in the same directory for how
+the final render code is assembled.
 
 ## Running the code
 
-Execute `mvn` if you have Maven already installed, or `./mvnw` if you don't. You'll need
-[Java8 installed](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) either way at
-a minimum version of `1.8.0_65`. Older versions have a bug that makes rendering
-brutally slow.
+Execute `mvn` if you have Maven already installed, or `./mvnw` if you
+don't. You'll need [Java8
+installed](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+either way at a minimum version of `1.8.0_65`. Older versions have a bug
+that makes rendering brutally slow. Note that since React is not
+thread-safe, Spring is configured to use a script engine per thread, and
+each one will have to load the bundle when it initialised. You may want to
+load the website a few times to make sure all the threads are initialised.
 
 To run the frontend in hot-module reloading mode:
 
@@ -80,8 +97,7 @@ most problems. You should note that server-side rendering *does not* require a
 DOM - which is why `src/main/js/react-renderer/polyfill.js` doesn't provide
 any `window` or `document` stubs.
 
-## The `render` function
+## Caveats
 
-We implement a customer render function for Spring to call. The source code
-is in `src/main/js/react-render/render.js`, and is compiled to ES5 syntax during the Maven
-build.
+This isn't necessarily the best way to write a React application or a
+Spring application. Pull requests welcome!
