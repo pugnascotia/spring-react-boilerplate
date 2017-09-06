@@ -1,6 +1,7 @@
 // @flow
 
 import axios from 'axios';
+import type { Thunk } from '../';
 
 export type Comment = {
   id?: number,
@@ -24,8 +25,6 @@ type CommentsRefreshedAction = {
 };
 
 type Action = AddCommentAction | CommentsRefreshedAction;
-
-import type { Thunk } from '../';
 
 const defaultState : State = {
   status: 'stale',
