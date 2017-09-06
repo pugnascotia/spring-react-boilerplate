@@ -18,7 +18,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import App from './containers/App';
 
-import createStore from './store';
+import createStore from './createStore';
 
 /* Client-side rendering. We rehydrate the Redux store and plugin it into the page render.*/
 if (typeof window !== 'undefined') {

@@ -1,4 +1,4 @@
-/* global springReactBoilerplate, assetManifest, Packages */
+/* global ReactRenderer, assetManifest, Packages */
 // eslint-disable-next-line no-unused-vars
 const render = (function () {
   let bundlePath = 'static/js/main.js';
@@ -84,7 +84,7 @@ const render = (function () {
   return function(_viewName, model) {
     const { requestPath, data, json } = getData(model);
 
-    const { markup, head } = springReactBoilerplate.renderApp(requestPath, data);
+    const { markup, head } = ReactRenderer.renderApp(requestPath, data);
 
     return populateTemplate(markup, head, json);
   };
