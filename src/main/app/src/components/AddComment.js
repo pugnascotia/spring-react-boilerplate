@@ -3,7 +3,7 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { saveComment } from '../actions';
+import { saveComment } from '../data/modules/comments';
 
 type Props = {
   dispatch: Function,

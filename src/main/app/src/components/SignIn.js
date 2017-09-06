@@ -5,11 +5,16 @@ import { withRouter } from 'react-router-dom';
 
 import axios from 'axios';
 
-import { authenticated } from '../actions';
+import { authenticated } from '../data/modules/auth';
+import type { Role } from '../data/modules/auth';
 
 type Props = {
-  dispatch: Function,
-  location: Object,
+  authenticated: (authData: { roles: Role[] }) => void,
+  location: {
+    state?: {
+      nextPathname?: string
+    }
+  },
   history: {
     push: (path: string) => void
   }
@@ -39,10 +44,12 @@ class SignIn extends React.Component<Props, State> {
 
     const data = `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
 
+    // TODO: It isn't great that this is embedded here. It means this
+    // component's concerns are too mixed.
     axios.post('/api/authenticate', data)
       .then(
-        success => {
-          this.props.dispatch(authenticated(success.data));
+        (success: { data: { roles: Role[] }}) => {
+          this.props.authenticated(success.data);
 
           const { location } = this.props;
           const nextPathname = location.state && location.state.nextPathname ? location.state.nextPathname : '/';
@@ -97,4 +104,6 @@ class SignIn extends React.Component<Props, State> {
 }
 
 /* Inject auth state and dispatch() into props */
-export default withRouter(connect(state => ({ auth: state.auth }))(SignIn));
+export default withRouter(
+  connect(null, { authenticated })(SignIn)
+);

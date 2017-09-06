@@ -4,13 +4,12 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import { loggedOut } from '../actions';
-
-import type { Auth } from '../types';
+import { logout } from '../data/modules/auth';
+import type { AuthState } from '../data/modules/auth';
 
 type Props = {
-  auth: Auth,
-  onSignOut: Function,
+  auth: AuthState,
+  logout: () => void,
   history: {
     push: (path: string) => void
   }
@@ -21,7 +20,7 @@ class Navigation extends React.Component<Props> {
     axios.post('/api/signout')
       .then(
         (/* success*/) => {
-          this.props.onSignOut();
+          this.props.logout();
           this.props.history.push('/');
         },
         failure => console.error(`Failed to log out successfully: ${failure}`)
@@ -29,6 +28,8 @@ class Navigation extends React.Component<Props> {
   }
 
   adminMenu() {
+    // TODO: This is only here because I have example links that go nowhere
+    /* eslint-disable jsx-a11y/href-no-hash */
     return this.props.auth.roles.some(r => r === 'ROLE_ADMIN')
       ? (<li className="dropdown">
         <a
@@ -48,6 +49,7 @@ class Navigation extends React.Component<Props> {
         </ul>
       </li>)
       : null;
+    /* eslint-enable jsx-a11y/href-no-hash */
   }
 
   authLink() {
@@ -96,10 +98,9 @@ class Navigation extends React.Component<Props> {
   }
 }
 
-/* Inject auth state and a dispatch() wrapper into props */
+const mapStateToProps = state => ({ auth: state.auth });
+const mapDispatchToProps = { logout };
+
 export default withRouter(
-  connect(
-    state => ({ auth: state.auth }),
-    dispatch => ({ onSignOut: () => dispatch(loggedOut()) })
-  )(Navigation)
+  connect(mapStateToProps, mapDispatchToProps)(Navigation)
 );

@@ -3,32 +3,27 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { refreshComments } from '../data/modules/comments';
+import type { Comment as CommentType } from '../data/modules/comments';
+
 import Comment from './Comment';
-import { refreshComments } from '../actions';
-
 import './CommentList.less';
-
-import type { Dispatch } from '../types';
 
 type Props = {
   status: string,
-  comments: Array<{
-    id: number,
-    content: string,
-    author: string
-  }>,
-  dispatch: Dispatch
+  comments: CommentType[],
+  refreshComments: () => void
 };
 
 class CommentList extends React.Component<Props> {
   componentDidMount() {
     if (this.props.status === 'stale') {
-      this.props.dispatch(refreshComments());
+      this.props.refreshComments();
     }
   }
 
   handleRefreshComments() {
-    this.props.dispatch(refreshComments());
+    this.props.refreshComments();
   }
 
   render() {
@@ -55,5 +50,4 @@ function mapStateToProps(state) {
   };
 }
 
-/* Inject the comments and dispatch() into props */
-export default connect(mapStateToProps)(CommentList);
+export default connect(mapStateToProps, { refreshComments })(CommentList);

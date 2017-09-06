@@ -282,7 +282,8 @@ module.exports = {
     new webpack.DefinePlugin(env.stringified),
     // Minify the code.
     new webpack.optimize.UglifyJsPlugin({
-      compress: {
+      beautify: process.env.DEBUG ? true : false,
+      compress: process.env.DEBUG ? false : {
         warnings: false,
         // Disabled because of an issue with Uglify breaking seemingly valid code:
         // https://github.com/facebookincubator/create-react-app/issues/2376
@@ -290,6 +291,7 @@ module.exports = {
         // https://github.com/mishoo/UglifyJS2/issues/2011
         comparisons: false,
       },
+      mangle: process.env.DEBUG ? false : true,
       output: {
         comments: false,
         // Turned on because emoji and regex is not minified properly using default

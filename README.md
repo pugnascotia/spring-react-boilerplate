@@ -63,33 +63,38 @@ the final render code is assembled.
 Execute `mvn` if you have Maven already installed, or `./mvnw` if you
 don't. You'll need [Java8
 installed](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-either way at a minimum version of `1.8.0_65`. Older versions have a bug
+either way at a *MINIMUM* version of `1.8.0_65`. Older versions have a bug
 that makes rendering brutally slow. Note that since React is not
 thread-safe, Spring is configured to use a script engine per thread, and
 each one will have to load the bundle when it initialised. You may want to
 load the website a few times to make sure all the threads are initialised.
 
-To run the frontend in hot-module reloading mode:
+To run the frontend in hot-module reloading mode, switch to another
+terminal and execute:
 
     cd src/main/app
     yarn start
 
+Now when you edit your files, the changes will be loaded in your browser
+automatically and, where possible, be applied without losing the
+application's current state.
+
 ## Conventions
 
 Controllers that render views are suffixed with `Controller`. REST endpoints are
-suffixed with `Resource`, and handle requests under `/api`.
+suffixed with `Resource` and handle requests under `/api`.
 
-## Testing the Webpack bundle
+## Testing the Webpack bundle / render function
 
 In order to preempt runtime errors with Nashorn loading the bundle, a test
 script is executed by Maven during the `test-compile` phase, located at
 `src/test/js/react-renderer/test.js`. If this script fails, you can diagnose the problem
-by:
+by running:
 
-* Running a debug build with `npm run debug`. This runs Webpack in a production
-  mode but without uglification.
-* Run the script again: `jjs src/test/js/test_bundle.js`
-* Look at the line in the bundle from the stacktrace and figure out the problem.
+    DEBUG=true mvn test-compile
+
+This will rebuild the webpack bundle without minification, which should
+make the cause of any error clearer.
 
 It's easy to create a bundle that's broken on the server by including code that
 expects a DOM - and that includes the Webpack style loader. This is the root of
