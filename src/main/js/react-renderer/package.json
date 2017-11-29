@@ -10,7 +10,7 @@
     "eslint": "^4.6.1"
   },
   "scripts": {
-    "build": "./build.sh",
+    "build": "node build.js",
     "lint": "eslint --ext .js ."
   }
 }

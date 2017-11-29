@@ -1,4 +1,5 @@
 #!/bin/bash
+# !!!! Converted to build.js in the spirit of being platform agnostic !!!!
 
 set -eo pipefail
 
