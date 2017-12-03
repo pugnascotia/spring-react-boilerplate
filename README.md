@@ -50,8 +50,8 @@ You also get:
 ## The `render` function
 
 We implement a custom render function for Spring to call. The source code
-is in `src/main/js/react-render/render.js`, and is compiled to ES5 syntax
-during the Maven build. Its build process also pulls in polyfills, to allow
+is in `src/main/js/react-render/renderer.js`, and is compiled to ES5 syntax
+during the Maven build. The build process also pulls in polyfills, to allow
 React etc to work, and also the frontend's JSON manifest, in order to
 locate the frontend's built assets. See the `build.sh` in the same
 directory for how the final render code is assembled.
@@ -65,8 +65,8 @@ either way at a *MINIMUM* version of `1.8.0_65`. Older versions have a bug
 that makes rendering brutally slow. Note that since React is not
 thread-safe, Spring is configured to use a script engine per thread, and
 each one will have to load the bundle when first initialises. You may want
-to force refresh the website a few times to make sure all the threads are
-initialised.
+to force refresh the website several times to make sure all the threads are
+initialised, particular if you intend to measure performance.
 
 To run the frontend in hot-module reloading mode, switch to another
 terminal and execute:
