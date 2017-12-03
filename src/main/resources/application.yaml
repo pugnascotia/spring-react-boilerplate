@@ -1,0 +1,12 @@
+server.error.whitelabel.enabled: false
+
+server.compression.enabled: true
+server.compression.min-response-size: 2048
+server.compression.mime-types:
+    - application/javascript
+    - application/json
+    - application/xml
+    - text/html
+    - text/xml
+    - text/plain
+    - text/css
